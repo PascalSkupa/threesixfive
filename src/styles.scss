@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+/* angular-cli file: src/styles.css */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  margin: 0;
+  background: #F2F2F2;
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 70px auto;
+  height: 100%;
+
+  #content {
+    padding: 30px 50px;
+
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

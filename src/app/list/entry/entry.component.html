@@ -1,0 +1,17 @@
+<div class="row" *ngFor="let grocery of groceryList">
+  <mat-label [innerHtml]="grocery.name">
+
+  </mat-label>
+
+  <mat-label [innerHtml]="grocery.amount">
+
+  </mat-label>
+
+  <mat-label [innerHtml]="grocery.unit">
+
+  </mat-label>
+
+  <button mat-icon-button (click)="deleteGrocery(grocery)">
+    <i class="material-icons">delete</i>
+  </button>
+</div>
