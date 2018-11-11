@@ -18,4 +18,8 @@ export class EntryComponent implements OnInit {
   deleteGrocery(grocery) {
     this.service.removeFromList(grocery);
   }
+  checkGrocery(grocery) {
+    this.deleteGrocery(grocery);
+    this.service.addToCheckedGroceries(grocery);
+  }
 }

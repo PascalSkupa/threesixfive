@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GroceryListService} from '../../grocery-list.service';
 import {Grocery} from '../../grocery';
 
@@ -20,7 +20,6 @@ export class EntryCreatorComponent implements OnInit {
     this.service.addToList(
       new Grocery(this.name, this.amount, this.unit)
     );
-    console.log(this.service.list);
   }
   ngOnInit() {
   }
