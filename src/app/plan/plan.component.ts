@@ -1,11 +1,11 @@
 import {
   Component,
   OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef
+  ChangeDetectionStrategy, Input, Output, EventEmitter,
 } from '@angular/core';
 import {CalendarEvent} from 'angular-calendar';
+import { CalendarHeaderComponent } from './calendar-header.component';
+
 
 
 @Component({
@@ -14,7 +14,22 @@ import {CalendarEvent} from 'angular-calendar';
   templateUrl: './plan.component.html',
   styleUrls: ['./plan.component.scss']
 })
+
 export class PlanComponent implements OnInit {
+  @Input()
+  view: string;
+
+  @Input()
+  viewDate: Date;
+
+  @Input()
+  locale: 'en';
+
+  @Output()
+  viewChange: EventEmitter<string> = new EventEmitter();
+
+  @Output()
+  viewDateChange: EventEmitter<Date> = new EventEmitter();
   view = 'month';
 
   viewDate: Date = new Date();
@@ -26,4 +41,5 @@ export class PlanComponent implements OnInit {
 
   ngOnInit() {
   }
+
 }

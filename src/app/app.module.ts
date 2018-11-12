@@ -1,7 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {AccordionModule} from 'primeng/accordion';
-import {MenuItem} from 'primeng/api';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
@@ -19,9 +17,13 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
-import {Grocery} from './grocery';
 import {GroceryListService} from './grocery-list.service';
 import { EntryCreatorComponent } from './list/entry-creator/entry-creator.component';
+import { NgModule } from '@angular/core';
+import {CalendarHeaderComponent} from './plan/demo-utils/calendar-header.component';
+import { CheckedEntryComponent } from './list/checked-entry/checked-entry.component';
+
+
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { EntryCreatorComponent } from './list/entry-creator/entry-creator.compon
     ListComponent,
     SettingsComponent,
     EntryComponent,
-    EntryCreatorComponent
+    EntryCreatorComponent,
+    CalendarHeaderComponent,
+    CheckedEntryComponent
   ],
   imports: [
     CommonModule,
@@ -45,12 +49,12 @@ import { EntryCreatorComponent } from './list/entry-creator/entry-creator.compon
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    }),
-    DemoUtilsModule
+    })
   ],
   providers: [GroceryListService],
   bootstrap: [AppComponent],
-  exports: [PlanComponent]
+  exports: [PlanComponent, CalendarHeaderComponent],
+
 })
 export class AppModule {
 }

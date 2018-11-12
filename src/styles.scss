@@ -3,6 +3,8 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+
+
 body {
   margin: 0;
   background: #F2F2F2;
@@ -19,6 +21,19 @@ body {
     padding: 30px 50px;
 
   }
+}
+
+.plan-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.controls{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 30%;
 }
 
 html, body { height: 100%; }
