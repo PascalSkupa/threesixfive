@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {GroceryListService} from '../../grocery-list.service';
-import {Grocery} from '../../grocery';
+import {GroceryListService} from '../../../services/grocery-list/grocery-list.service';
+import {Grocery} from '../../../modals/grocery';
 
 
 @Component({

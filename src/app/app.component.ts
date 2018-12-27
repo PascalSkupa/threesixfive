@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {User} from './login/_models';
+import {Router} from '@angular/router';
+import {AuthenticationService} from './login/_services';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'threesixfive';
+  currentUser: User;
+
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+  }
+
 }
