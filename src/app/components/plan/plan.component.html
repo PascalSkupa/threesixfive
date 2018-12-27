@@ -5,8 +5,6 @@
   </mwl-demo-utils-calendar-header>
 
 
-
-
   <div class="alert alert-info">
     <div [ngSwitch]="view">
       <span *ngSwitchCase="'month'"></span>
@@ -20,7 +18,7 @@
       *ngSwitchCase="'month'"
       [viewDate]="viewDate"
       [events]="events"
-      (dayClicked)="viewDate = $event.day.date; view = 'day'">
+      (dayClicked)="viewDate = $event.day.date;">
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
       *ngSwitchCase="'week'"
@@ -28,10 +26,11 @@
       [events]="events"
       (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'">
     </mwl-calendar-week-view>
-    <mwl-calendar-day-view
-      *ngSwitchCase="'day'"
-      [viewDate]="viewDate"
-      [events]="events">
-    </mwl-calendar-day-view>
+
+    <app-day-view  [viewDate]="viewDate.toString()">
+
+    </app-day-view>
+
+
   </div>
 </div>

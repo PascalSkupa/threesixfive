@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Grocery} from './grocery';
+import {Grocery} from './modals/grocery';
 
 @Injectable({
   providedIn: 'root'
