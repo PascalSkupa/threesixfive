@@ -61,9 +61,9 @@ Now you can start the PHP Development Server to serve the project (**only** for 
 
 #### Linux
 
-Execute the script [run](run) to start the [http://php.net/manual/en/features.commandline.webserver.php](PHP Development Server) on localhost:8000
+Execute the script [run](run) to start the [PHP Development Serve])(http://php.net/manual/en/features.commandline.webserver.php) on localhost:8000
 
 #### Windows
 
-Execute the script [runWin.bat](runWin.bat) to start the [http://php.net/manual/en/features.commandline.webserver.php](PHP Development Server) on localhost:8000
+Execute the script [runWin.bat](runWin.bat) to start the [PHP Development Serve])(http://php.net/manual/en/features.commandline.webserver.php) on localhost:8000
 
