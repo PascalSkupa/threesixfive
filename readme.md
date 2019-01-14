@@ -19,3 +19,46 @@ If you discover a security vulnerability within Lumen, please send an e-mail to 
 ## License
 
 The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+# Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+What software you need to install and how to install them (Linux)
+
+#### Server Requirements
+
+* PHP >= 5.5.9
+* OpenSSL PHP Extension
+* PDO PHP Extension
+* Mbstring PHP Extension
+
+You also have to install composer.
+For Linux:
+```
+wget https://getcomposer.org/composer.phar
+chmod +x ./composer.phar 
+mv ./composer.phar /usr/bin/composer
+```
+For Windows please visit [https://getcomposer.org/](https://getcomposer.org/).
+
+### Installing
+
+After composer is installed execute the command
+```
+composer update
+```
+
+Now you can start the PHP Development Server to serve the project (**only** for testing or application development, if you want put it online use a proper webserver)
+
+#### Linux
+
+Execute the script [run](run) to start the PHP Development Server on localhost:8000
+
+#### Windows
+
+Execute the script [runWin.bat](runWin.bat) to start the PHP Development Server on localhost:8000
+
