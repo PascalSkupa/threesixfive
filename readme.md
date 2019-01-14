@@ -27,7 +27,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What software you need to install and how to install them (Linux)
+What software you need to install and how to install them
 
 #### Server Requirements
 
@@ -37,6 +37,7 @@ What software you need to install and how to install them (Linux)
 * Mbstring PHP Extension
 
 You also have to install composer.
+
 For Linux:
 ```
 wget https://getcomposer.org/composer.phar
