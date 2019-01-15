@@ -33,6 +33,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 What software you need to install and how to install them
 
+For more Information please visit [Lumen Documentation](https://lumen.laravel.com/docs/5.7).
+
 #### Server Requirements
 
 * PHP >= 5.5.9
