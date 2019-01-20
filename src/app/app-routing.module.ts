@@ -7,6 +7,8 @@ import {RegisterComponent} from './login/register';
 import {LoginComponent} from './login/login';
 import {HomeComponent} from './login/home';
 import {AuthGuard} from './login/_guards';
+import {MainApplicationComponent} from './components/main-application/main-application.component';
+import {FoodFormularComponent} from './food-formular/food-formular.component';
 
 const routes: Routes = [
   {
@@ -24,12 +26,14 @@ const routes: Routes = [
 ];
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'foodFormular', component: FoodFormularComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: '', component: MainApplicationComponent, canActivate: [AuthGuard]},
 
   // otherwise redirect to home
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
+
 ];
 
 
