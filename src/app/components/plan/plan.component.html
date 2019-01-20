@@ -5,13 +5,7 @@
   </mwl-demo-utils-calendar-header>
 
 
-  <div class="alert alert-info">
-    <div [ngSwitch]="view">
-      <span *ngSwitchCase="'month'"></span>
-      <span *ngSwitchCase="'week'"></span>
-      <span *ngSwitchCase="'day'"></span>
-    </div>
-  </div>
+
 
   <div [ngSwitch]="view">
     <mwl-calendar-month-view

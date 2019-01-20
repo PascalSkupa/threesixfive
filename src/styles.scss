@@ -12,6 +12,11 @@ body {
   height: 100vh;
 }
 
+.nav{
+  position: fixed;
+  width: 100%;
+}
+
 #container {
   display: grid;
   grid-template-columns: 70px auto;

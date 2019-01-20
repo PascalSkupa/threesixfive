@@ -25,6 +25,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
 
 // used to create fake backend
 import { fakeBackendProvider } from './login/_helpers';
@@ -35,6 +36,9 @@ import { JwtInterceptor, ErrorInterceptor } from './login/_helpers';
 import { HomeComponent } from './login/home';
 import { LoginComponent } from './login/login';
 import { RegisterComponent } from './login/register';
+import { MainApplicationComponent } from './components/main-application/main-application.component';
+import { TopbarComponent } from './components/topbar/topbar.component';
+import { FoodFormularComponent } from './food-formular/food-formular.component';
 
 
 @NgModule({
@@ -53,7 +57,10 @@ import { RegisterComponent } from './login/register';
     AlertComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    MainApplicationComponent,
+    TopbarComponent,
+    FoodFormularComponent
   ],
   imports: [
     CommonModule,
