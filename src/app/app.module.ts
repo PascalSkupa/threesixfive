@@ -27,6 +27,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {CardModule} from 'primeng/card';
+import {ButtonModule} from 'primeng/button';
+import {InputTextModule} from 'primeng/inputtext';
 
 // used to create fake backend
 import { fakeBackendProvider } from './login/_helpers';
@@ -75,6 +78,9 @@ import { FoodFormularComponent } from './food-formular/food-formular.component';
     ReactiveFormsModule,
     HttpClientModule,
     SelectButtonModule,
+    CardModule,
+    ButtonModule,
+    InputTextModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
