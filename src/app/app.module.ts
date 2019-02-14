@@ -17,7 +17,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {GroceryListService} from './services/grocery-list/grocery-list.service';
 import {EntryCreatorComponent} from './components/list/entry-creator/entry-creator.component';
-import {CalendarHeaderComponent} from './components/plan/demo-utils/calendar-header.component';
+import {CalendarHeaderComponent} from './components/demo-utils/calendar-header.component';
 import {CheckedEntryComponent} from './components/list/checked-entry/checked-entry.component';
 import {DayViewComponent} from './components/plan/day-view/day-view.component';
 import {RecipeViewComponent} from './components/recipe-view/recipe-view.component';
@@ -26,6 +26,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
+import {CardModule} from 'primeng/card';
+
 
 // used to create fake backend
 import { fakeBackendProvider } from './login/_helpers';
@@ -39,6 +41,8 @@ import { RegisterComponent } from './login/register';
 import { MainApplicationComponent } from './components/main-application/main-application.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { FoodFormularComponent } from './food-formular/food-formular.component';
+import { MonthViewComponent } from './components/plan/month-view/month-view.component';
+import { WeekViewComponent } from './components/plan/week-view/week-view.component';
 
 
 @NgModule({
@@ -60,7 +64,9 @@ import { FoodFormularComponent } from './food-formular/food-formular.component';
     RegisterComponent,
     MainApplicationComponent,
     TopbarComponent,
-    FoodFormularComponent
+    FoodFormularComponent,
+    MonthViewComponent,
+    WeekViewComponent
   ],
   imports: [
     CommonModule,
@@ -73,6 +79,7 @@ import { FoodFormularComponent } from './food-formular/food-formular.component';
     MatExpansionModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CardModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
