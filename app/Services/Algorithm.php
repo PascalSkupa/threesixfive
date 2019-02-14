@@ -3,38 +3,48 @@
 namespace App\Services;
 
 use Fatsecret;
+use Carbon\Carbon;
+use App\Plan;
 
 class Algorithm
 {
-    private $recipe_types = [
-        'breakfast' => [
-            'count' => 0,
-            'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'breakfast')['recipes']['total_results'],
-            'type' => 'breakfast',
-            'days' => []
-        ],
-        'lunch' => [
-            'count' => 0,
-            'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'lunch')['recipes']['total_results'],
-            'type' => 'lunch',
-            'days' => []
-        ],
-        'main dish' => [
-            'count' => 0,
-            'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'main dish')['recipes']['total_results'],
-            'type' => 'main dish',
-            'days' => []
-        ],
-        'snack' => [
-            'count' => 0,
-            'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'snack')['recipes']['total_results'],
-            'type' => 'snack',
-            'days' => []
-        ]
-    ];
+    private $recipe_types;
+    private $diets;
+    private $allergens;
+    private $nogos;
 
-    public function __construct($plan)
+    public function __construct($plan, $allergens, $nogos, $diets)
     {
+        $this->recipe_types = [
+            'breakfast' => [
+                'count' => 0,
+                'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'breakfast')['recipes']['total_results'],
+                'type' => 'breakfast',
+                'days' => []
+            ],
+            'lunch' => [
+                'count' => 0,
+                'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'lunch')['recipes']['total_results'],
+                'type' => 'lunch',
+                'days' => []
+            ],
+            'main dish' => [
+                'count' => 0,
+                'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'main dish')['recipes']['total_results'],
+                'type' => 'main dish',
+                'days' => []
+            ],
+            'snack' => [
+                'count' => 0,
+                'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'snack')['recipes']['total_results'],
+                'type' => 'snack',
+                'days' => []
+            ]
+        ];
+        $this->allergens = $allergens;
+        $this->nogos = $nogos;
+        $this->diets = $diets;
+
         foreach ($plan as $weekday) {
             if ($weekday['breakfast']) {
                 $this->recipe_types['breakfast']['count'] += (int)$weekday['breakfast'];
@@ -57,11 +67,93 @@ class Algorithm
 
     public function generateWeek()
     {
+        $weekPlan = null;
 
+        foreach ($this->recipe_types as $item) {
+            $page = rand(1, (int)$item['totalResults'] / 50);
+            $recipes = FatSecret::searchRecipes('', $page, 50, $item['type'])['recipes']['recipe'];
+            $numbers = $this->randomSet(sizeof($recipes), sizeof($recipes));
+
+            for ($i = 0, $num = 0; $i < sizeof($item['days']); $i++, $num++) {
+                if ($this->checkRecipe((int)$recipes[$numbers[$i]]['recipe_id'], $this->allergens, $this->nogos)) {
+                    $weekPlan[$item['days'][$i]][$item['type']] = (int)$recipes[$numbers[$num]]['recipe_id'];
+                } else {
+                    $i--;
+                }
+                sleep(1);
+            }
+        }
+
+        return $weekPlan;
     }
 
-    private function generateType()
-    {
+    public function saveWeek($id, $weekPlan) {
+        $week = [
+            ['Monday', Carbon::now()->startOfWeek()->format('Y-m-d')],
+            ['Tuesday', Carbon::now()->startOfWeek()->addDay(1)->format('Y-m-d')],
+            ['Wednesday', Carbon::now()->startOfWeek()->addDay(2)->format('Y-m-d')],
+            ['Thursday', Carbon::now()->startOfWeek()->addDay(3)->format('Y-m-d')],
+            ['Friday', Carbon::now()->startOfWeek()->addDay(4)->format('Y-m-d')],
+            ['Saturday', Carbon::now()->startOfWeek()->addDay(5)->format('Y-m-d')],
+            ['Sunday', Carbon::now()->endOfWeek()->format('Y-m-d')]
+        ];
 
+        foreach ($week as $weekday) {
+            if (array_key_exists($weekday[0], $weekPlan)) {
+                $input = [
+                    $weekday[1],
+                    $id,
+                    $weekday[0],
+                    $weekPlan[$weekday]['breakfast'],
+                    $weekPlan[$weekday]['lunch'],
+                    $weekPlan[$weekday]['dinner'],
+                    $weekPlan[$weekday]['snack']
+                ];
+                Plan::create($input);
+            } else {
+                Plan::create([$weekday[1], $id, $weekday[0], null, null, null, null]);
+            }
+        }
+    }
+
+    private function checkRecipe($recipe_id, $allergens, $nogos)
+    {
+        $ingredients = Fatsecret::getRecipe($recipe_id)['recipe']['ingredients']['ingredient'];
+
+        foreach ($ingredients as $ingredient) {
+            if (isset($ingredient['food_id'])) {
+                $food = FatSecret::getIngredient($ingredient['food_id']);
+                if (isset($food['food']['food_sub_categories']['food_sub_category'])) {
+                    if (is_array($food['food']['food_sub_categories']['food_sub_category'])) {
+                        foreach (($food['food']['food_sub_categories']['food_sub_category']) as $sub_category) {
+                            if (in_array($sub_category, $nogos)) {
+                                return false;
+                            }
+                        }
+                    }
+
+                    return true;
+                }
+            }
+            sleep(1);
+        }
+
+        return false;
+    }
+
+    private function randomSet($num, $max)
+    {
+        $result = [];
+
+        for ($i = 0; $i < $num; $i++) {
+            $rand = rand(0, $max - 1);
+            if (!in_array($rand, $result)) {
+                array_push($result, $rand);
+            } else {
+                $i--;
+            }
+        }
+
+        return $result;
     }
 }

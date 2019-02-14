@@ -32,14 +32,14 @@ class GroceryListController extends Controller
         $ingredients = FatSecret::getRecipe(23061811)['recipe']['ingredients'];
 
         if (Grocery::where('fk_user_id', '=', $id)->get() != null) {
-            array_push($ingredients, Grocery::where('fk_user_id', '=', $id)->get());
+            //array_push($ingredients, Grocery::where('fk_user_id', '=', $id)->get());
         }
 
-        return response()->json($ingredients);
+        return response()->json($dates);
     
     }
     
-    public function createIndividualGroceryList(Request $request) {
+    public function createIndividualGroceryList($id, Request $request) {
     
         $this->validate($request, [
             'name' => 'required',

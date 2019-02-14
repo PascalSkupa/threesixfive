@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use FatSecret;
 use App\Services\Algorithm;
+use App\Plan;
 
 class AlgorithmController extends Controller
 {
@@ -20,71 +22,16 @@ class AlgorithmController extends Controller
 
     public function generateAlgorithm($id, Request $request)
     {
+        $Algorithm = new Algorithm(
+            $request->plan,
+            $request->allergens,
+            $request->categories,
+            $request->diets
+        );
 
-        $recipe_ids = [];
-        $nogos = $request->nogos;
-        $diets = $request->diets;
-        $allergens = $request->allergens;
-        $plan = $request->plan;
-        $counter = [
-            'breakfast' => [
-                'count' => 0,
-                'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'breakfast')['recipes']['total_results'],
-                'type' => 'breakfast',
-                'days' => []
-            ],
-            'lunch' => [
-                'count' => 0,
-                'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'lunch')['recipes']['total_results'],
-                'type' => 'lunch',
-                'days' => []
-            ],
-            'main dish' => [
-                'count' => 0,
-                'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'main dish')['recipes']['total_results'],
-                'type' => 'main dish',
-                'days' => []
-            ],
-            'snack' => [
-                'count' => 0,
-                'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'snack')['recipes']['total_results'],
-                'type' => 'snack',
-                'days' => []
-            ]
-        ];
+        $Week = $Algorithm->generateWeek();
 
-        // Count
-        foreach ($plan as $weekday) {
-            if ($weekday['breakfast']) {
-                $counter['breakfast']['count'] += (int)$weekday['breakfast'];
-                array_push($counter['breakfast']['days'], $weekday['weekday']);
-            }
-            if ($weekday['lunch']) {
-                $counter['lunch']['count'] += (int)$weekday['lunch'];
-                array_push($counter['lunch']['days'], $weekday['weekday']);
-            }
-            if ($weekday['main dish']) {
-                $counter['main dish']['count'] += (int)$weekday['main dish'];
-                array_push($counter['main dish']['days'], $weekday['weekday']);
-            }
-            if ($weekday['snack']) {
-                $counter['snack']['count'] += (int)$weekday['snack'];
-                array_push($counter['snack']['days'], $weekday['weekday']);
-            }
-        }
-
-        // Select random recipes
-        foreach ($counter as $item) {
-            $page = rand(1, (int)$item['totalResults'] / 50);
-            $recipes = FatSecret::searchRecipes('', $page, 50, $item['type'])['recipes']['recipe'];
-            $numbers = $this->randomSet($item['count'], sizeof($recipes));
-
-            for ($i = 0; $i < sizeof($item['days']); $i++) {
-                $recipe_ids[$item['days'][$i]][$item['type']] = (int)$recipes[$numbers[$i]]['recipe_id'];
-            }
-        }
-
-        return response()->json($recipe_ids);
+        return response()->json($Week);
     }
 
     private function randomSet($num, $max)
@@ -101,5 +48,30 @@ class AlgorithmController extends Controller
         }
 
         return $result;
+    }
+
+    public function checkRecipe($recipe_id, $allergens, $nogos)
+    {
+        $ingredients = Fatsecret::getRecipe($recipe_id)['recipe']['ingredients']['ingredient'];
+
+        foreach ($ingredients as $ingredient) {
+            if (isset($ingredient['food_id'])) {
+                $food = FatSecret::getIngredient($ingredient['food_id']);
+                if (isset($food['food']['food_sub_categories']['food_sub_category'])) {
+                    if (is_array($food['food']['food_sub_categories']['food_sub_category'])) {
+                        foreach (($food['food']['food_sub_categories']['food_sub_category']) as $sub_category) {
+                            if (in_array($sub_category, $nogos)) {
+                                return false;
+                            }
+                        }
+                    }
+
+                    return true;
+                }
+            }
+            sleep(1);
+        }
+
+        return false;
     }
 }

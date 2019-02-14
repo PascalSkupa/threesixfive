@@ -39,10 +39,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('menu/{id}', ['uses' => 'MenuController@getMenu']);
     
     // Generate menu for one specific user with http://localhost:8000/api/algorithm/generate/userid
-    $router->post('algorithm/{id}', ['uses' => 'AlgorithmController@generateAlgorithm']);
+    $router->post('form/{id}', ['uses' => 'AlgorithmController@generateAlgorithm']);
     
     // Create grocery list for one specific user with http://localhost:8000/api/grocerylist
-    $router->post('groceries', ['uses' => 'GroceryListController@createIndividualGroceryList']);
+    $router->post('groceries/{id}', ['uses' => 'GroceryListController@createIndividualGroceryList']);
     
     // Get grocery list from one specific user with http://localhost:8000/api/grocerylist/userid
      $router->get('groceries/{id}', ['uses' => 'GroceryListController@getGroceryList']);

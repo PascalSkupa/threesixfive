@@ -16,7 +16,7 @@ class Plan extends Model
         'pk_date', 'pk_fk_user_id', 'weekday', 'breakfast', 'lunch', 'dinner', 'snack',
     ];
     
-    protected $primaryKey = 'pk_date', 'pk_fk_user_id';
+    protected $primaryKey = ['pk_date', 'pk_fk_user_id'];
     
     public function plan() {
         return $this->hasOne('App\User');
