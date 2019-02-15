@@ -12,7 +12,7 @@ class CreateNogoTable extends Migration
 public function up()
 {
 Schema::create('nogo', function (Blueprint $table) {
-$table->integer('pk_nogo_id');
+$table->integer('pk_nogo_id')->primary();
 $table->unsignedInteger('fk_n_user_id');
 $table->foreign('fk_n_user_id')->references('pk_user_id')->on('users')->onDelete('cascade');
 $table->unsignedInteger('fk_object');

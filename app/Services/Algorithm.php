@@ -31,7 +31,7 @@ class Algorithm
             'main dish' => [
                 'count' => 0,
                 'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'main dish')['recipes']['total_results'],
-                'type' => 'main dish',
+                'type' => 'main_dish',
                 'days' => []
             ],
             'snack' => [
@@ -88,6 +88,7 @@ class Algorithm
     }
 
     public function saveWeek($id, $weekPlan) {
+        $response = $weekPlan;
         $week = [
             ['Monday', Carbon::now()->startOfWeek()->format('Y-m-d')],
             ['Tuesday', Carbon::now()->startOfWeek()->addDay(1)->format('Y-m-d')],
@@ -100,20 +101,37 @@ class Algorithm
 
         foreach ($week as $weekday) {
             if (array_key_exists($weekday[0], $weekPlan)) {
+                $response[$weekday[0]] = $weekPlan[$weekday[0]];
                 $input = [
-                    $weekday[1],
-                    $id,
-                    $weekday[0],
-                    $weekPlan[$weekday]['breakfast'],
-                    $weekPlan[$weekday]['lunch'],
-                    $weekPlan[$weekday]['dinner'],
-                    $weekPlan[$weekday]['snack']
+                    'pk_date' => $weekday[1],
+                    'pk_fk_user_id' => (int)$id,
+                    'weekday' => $weekday[0],
+                    'breakfast' => $weekPlan[$weekday[0]]['breakfast'],
+                    'lunch' => $weekPlan[$weekday[0]]['lunch'],
+                    'main_dish' => $weekPlan[$weekday[0]]['main dish'],
+                    'snack' => $weekPlan[$weekday[0]]['snack']
                 ];
+
                 Plan::create($input);
             } else {
-                Plan::create([$weekday[1], $id, $weekday[0], null, null, null, null]);
+                $response[$weekday[0]]['breakfast'] = null;
+                $response[$weekday[0]]['lunch'] = null;
+                $response[$weekday[0]]['main_dish'] = null;
+                $response[$weekday[0]]['snack'] = null;
+
+                Plan::create([
+                    'pk_date' => $weekday[1],
+                    'pk_fk_user_id' => (int)$id,
+                    'weekday' => $weekday[0],
+                    'breakfast' => null,
+                    'lunch' => null,
+                    'main_dish' => null,
+                    'snack' => null
+                ]);
             }
         }
+
+        return $response;
     }
 
     private function checkRecipe($recipe_id, $allergens, $nogos)

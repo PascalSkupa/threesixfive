@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserDiet extends Model
 {
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +17,7 @@ class UserDiet extends Model
         'pk_fk_d_user_id', 'pk_fk_u_diet_id', 
     ];
     
-    protected $primaryKey = 'pk_fk_d_user_id', 'pk_fk_u_diet_id';
+    protected $primaryKey = 'pk_fk_d_user_id';
     
     public function user() {
         return $this->belongsTo('App\User');

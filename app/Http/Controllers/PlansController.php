@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Plan;
 use Illuminate\Http\Request;
 
-class PlanController extends Controller
+class PlansController extends Controller
 {
 
     public function __construct()

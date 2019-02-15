@@ -17,6 +17,8 @@ class CreateUserDietTable extends Migration
             $table->unsignedInteger('pk_fk_u_diets_id');
             $table->foreign('pk_fk_u_diets_id')->references('pk_diet_id')->on('diets');
         });
+
+        DB::unprepared('ALTER TABLE user_diets ADD PRIMARY KEY (pk_fk_d_user_id, pk_fk_u_diets_id)');
     }
     /**
         * Reverse the migrations.
