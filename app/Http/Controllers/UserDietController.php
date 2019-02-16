@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\UserDiet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserDietController extends Controller
 {
@@ -24,16 +25,16 @@ class UserDietController extends Controller
             return response()->json($user_diet, 201);
     }
     
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
-        $user_diet = UserDiet::findOrFail($id);
+        $user_diet = UserDiet::findOrFail(Auth::id());
         $user_diet->update($request->all());
             return response()->json($user_diet, 200);
     }
     
-    public function delete($id)
+    public function delete()
     {
-        UserDiet::findOrFail($id)->delete();
+        UserDiet::findOrFail(Auth::id())->delete();
         return response('Deleted Successfully', 200);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Plan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlansController extends Controller
 {
@@ -29,16 +30,16 @@ class PlansController extends Controller
             return response()->json($plan, 201);
     }
     
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
-        $plan = Plan::findOrFail($id);
+        $plan = Plan::findOrFail(Auth::id());
         $plan->update($request->all());
             return response()->json($plan, 200);
     }
     
-    public function delete($id)
+    public function delete()
     {
-        Plan::findOrFail($id)->delete();
+        Plan::findOrFail(Auth::id())->delete();
         return response('Deleted Successfully', 200);
     }
 }

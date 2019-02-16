@@ -18,10 +18,10 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
 
     // Get all users with http://localhost:8000/api/users
-    $router->get('users', ['uses' => 'UsersController@showAllUsers']);
+    $router->get('users/all', ['uses' => 'UsersController@showAllUsers']);
 
-    // Get one specific user with http://localhost:8000/api/users/id
-    $router->get('users/{id}', ['uses' => 'UsersController@showOneUser']);
+    // Get user who is requesting with http://localhost:8000/api/users
+    $router->get('users', ['uses' => 'UsersController@showOneUser']);
 
     // Login with http://localhost:8000/api/login
     $router->post('login', ['uses' => 'UsersController@login']);
@@ -30,33 +30,33 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('users', ['uses' => 'UsersController@create']);
 
     // Delete user with http://localhost:8000/api/users/id
-    $router->delete('users/{id}', ['uses' => 'UsersController@delete']);
+    $router->delete('users', ['uses' => 'UsersController@delete']);
 
     // Update user with http://localhost:8000/api/users/id
-    $router->put('users/{id}', ['uses' => 'UsersController@update']);
+    $router->put('users', ['uses' => 'UsersController@update']);
 
 
 
     // Get menu from one specific user with http://localhost:8000/api/menu/userid
-    $router->get('menu/{id}/{year}/{week}', ['uses' => 'MenuController@getMenu']);
+    $router->get('menu/{year}/{week}', ['uses' => 'MenuController@getMenu']);
 
     // Generate menu for one specific user with http://localhost:8000/api/algorithm/generate/userid
-    $router->post('form/{id}', ['uses' => 'AlgorithmController@generateAlgorithm']);
+    $router->post('form', ['uses' => 'AlgorithmController@generateAlgorithm']);
 
     // ...
 
 
 
     // Create grocery list for one specific user with http://localhost:8000/api/grocerylist
-    $router->post('groceries/{id}', ['uses' => 'GroceryListController@createIndividualGroceryList']);
+    $router->post('groceries', ['uses' => 'GroceryListController@createIndividualGroceryList']);
 
     // Get grocery list from one specific user with http://localhost:8000/api/grocerylist/userid
-    $router->get('groceries/{id}', ['uses' => 'GroceryListController@getGroceryList']);
+    $router->get('groceries', ['uses' => 'GroceryListController@getGroceryList']);
 
 
 
     // Generate Pdf file of one week for one user with http://localhost:8000/api/pdf/userid/week
-    $router->get('pdf/{id}/{week}', ['uses' => 'PdfController@generateWeekPlan']);
+    $router->get('pdf/{week}', ['uses' => 'PdfController@generateWeekPlan']);
 
 
 

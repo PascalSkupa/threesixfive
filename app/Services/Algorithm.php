@@ -5,6 +5,7 @@ namespace App\Services;
 use Fatsecret;
 use Carbon\Carbon;
 use App\Plan;
+use Illuminate\Support\Facades\Auth;
 
 class Algorithm
 {
@@ -87,8 +88,8 @@ class Algorithm
         return $weekPlan;
     }
 
-    public function saveWeek($id, $weekPlan) {
-        $response = $weekPlan;
+    public function saveWeek($weekPlan) {
+        $response = null;
         $week = [
             ['Monday', Carbon::now()->startOfWeek()->format('Y-m-d')],
             ['Tuesday', Carbon::now()->startOfWeek()->addDay(1)->format('Y-m-d')],
@@ -104,7 +105,7 @@ class Algorithm
                 $response[$weekday[0]] = $weekPlan[$weekday[0]];
                 $input = [
                     'pk_date' => $weekday[1],
-                    'pk_fk_user_id' => (int)$id,
+                    'pk_fk_user_id' => (int)Auth::id(),
                     'weekday' => $weekday[0],
                     'breakfast' => $weekPlan[$weekday[0]]['breakfast'],
                     'lunch' => $weekPlan[$weekday[0]]['lunch'],
@@ -121,7 +122,7 @@ class Algorithm
 
                 Plan::create([
                     'pk_date' => $weekday[1],
-                    'pk_fk_user_id' => (int)$id,
+                    'pk_fk_user_id' => (int)Auth::id(),
                     'weekday' => $weekday[0],
                     'breakfast' => null,
                     'lunch' => null,

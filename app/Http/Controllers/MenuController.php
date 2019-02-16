@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Plan;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
@@ -18,7 +19,7 @@ class MenuController extends Controller
         $this->middleware('auth');
     }
 
-    public function getMenu($id, $year, $week)
+    public function getMenu($year, $week)
     {
 
         $date = Carbon::now();
@@ -29,7 +30,7 @@ class MenuController extends Controller
         $lastDate = $date->endOfWeek()->format('Y-m-d');
 
         $select = DB::table('plans')
-            ->where('pk_fk_user_id', '=', $id)
+            ->where('pk_fk_user_id', '=', Auth::id())
             ->where('pk_date', '>=', $firstDate)
             ->where('pk_date', '<=', $lastDate)->get();
 
@@ -41,6 +42,5 @@ class MenuController extends Controller
         }
 
         return response()->json($weekPlan);
-
     }
 }

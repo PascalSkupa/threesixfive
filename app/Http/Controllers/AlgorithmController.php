@@ -20,7 +20,7 @@ class AlgorithmController extends Controller
         $this->middleware('auth');
     }
 
-    public function generateAlgorithm($id, Request $request)
+    public function generateAlgorithm(Request $request)
     {
         $Algorithm = new Algorithm(
             $request->plan,
@@ -30,7 +30,7 @@ class AlgorithmController extends Controller
         );
 
         $Week = $Algorithm->generateWeek();
-        $Week = $Algorithm->saveWeek($id, $Week);
+        $Week = $Algorithm->saveWeek($Week);
 
         return response()->json($Week);
     }

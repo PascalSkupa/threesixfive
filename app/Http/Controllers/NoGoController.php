@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\NoGo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoGoController extends Controller
 {
@@ -25,16 +26,16 @@ class NoGoController extends Controller
             return response()->json($nogo, 201);
     }
     
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
-        $nogo = NoGo::findOrFail($id);
+        $nogo = NoGo::findOrFail(Auth::id());
         $nogo->update($request->all());
             return response()->json($nogo, 200);
     }
     
-    public function delete($id)
+    public function delete()
     {
-        NoGo::findOrFail($id)->delete();
+        NoGo::findOrFail(Auth::id())->delete();
         return response('Deleted Successfully', 200);
     }
 }

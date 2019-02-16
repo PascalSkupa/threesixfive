@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class UsersController extends Controller
@@ -21,9 +22,9 @@ class UsersController extends Controller
         return response()->json(User::all());
     }
 
-    public function showOneUser($id)
+    public function showOneUser()
     {
-        return response()->json(User::find($id));
+        return response()->json(User::find(Auth::id()));
     }
 
     public function login(Request $request)
@@ -67,16 +68,16 @@ class UsersController extends Controller
         return response()->json(['Not acceptable' => 406], 406);
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail(Auth::id());
         $user->update($request->all());
         return response()->json($user, 200);
     }
 
-    public function delete($id)
+    public function delete()
     {
-        User::findOrFail($id)->delete();
+        User::findOrFail(Auth::id())->delete();
         return response('Deleted Successfully', 200);
     }
 }

@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
     
     protected $hidden = [
-        'password',
+        'password', 'pk_user_id'
     ];
     
     protected $primaryKey = 'pk_user_id';

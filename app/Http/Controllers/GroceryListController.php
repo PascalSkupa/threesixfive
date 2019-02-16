@@ -6,6 +6,7 @@ use App\Grocery;
 use Carbon\Carbon;
 use FatSecret;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GroceryListController extends Controller
 {
@@ -19,7 +20,7 @@ class GroceryListController extends Controller
         $this->middleware('auth');
     }
 
-    public function getGroceryList($id) {
+    public function getGroceryList() {
     
         $today = Carbon::now();
         $sunday = Carbon::parse('next sunday')->addDay();  
@@ -31,7 +32,7 @@ class GroceryListController extends Controller
 
         $ingredients = FatSecret::getRecipe(23061811)['recipe']['ingredients'];
 
-        if (Grocery::where('fk_user_id', '=', $id)->get() != null) {
+        if (Grocery::where('fk_user_id', '=', Auth::id())->get() != null) {
             //array_push($ingredients, Grocery::where('fk_user_id', '=', $id)->get());
         }
 
@@ -39,7 +40,7 @@ class GroceryListController extends Controller
     
     }
     
-    public function createIndividualGroceryList($id, Request $request) {
+    public function createIndividualGroceryList(Request $request) {
     
         $this->validate($request, [
             'name' => 'required',
