@@ -84,6 +84,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Braunson\FatSecret\FatSecretServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
+$app->register(Elibyy\TCPDF\ServiceProvider::class);
 
 if (!class_exists('FatSecret')) {
     class_alias('Braunson\FatSecret\Facade', 'FatSecret');

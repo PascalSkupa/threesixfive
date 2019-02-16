@@ -43,7 +43,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // Generate menu for one specific user with http://localhost:8000/api/algorithm/generate/userid
     $router->post('form/{id}', ['uses' => 'AlgorithmController@generateAlgorithm']);
 
-    //
+    // ...
 
 
 
@@ -52,6 +52,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     // Get grocery list from one specific user with http://localhost:8000/api/grocerylist/userid
     $router->get('groceries/{id}', ['uses' => 'GroceryListController@getGroceryList']);
+
+
+
+    // Generate Pdf file of one week for one user with http://localhost:8000/api/pdf/userid/week
+    $router->get('pdf/{id}/{week}', ['uses' => 'PdfController@generateWeekPlan']);
 
 
 
