@@ -10,7 +10,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 export class DayViewComponent implements OnInit {
 
-  @Input() viewDate: String;
+  @Input() Date;
   date: string
   constructor() { }
 

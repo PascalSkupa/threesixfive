@@ -1,6 +1,13 @@
-<div class="plan-container" [ngSwitch] =  >
-  <app-month-view></app-month-view>
+<!--<button (click)="viewDay()"></button>-->
+<button (click)="viewMonth()">viewMonth</button>
+<div class="plan-container" [ngSwitch] = "key">
 
+  <!--<app-month-view *ngSwitchCase="'monthComponent'">-->
+  <!--</app-month-view>-->
+  <div  *ngSwitchCase="'monthComponent'">
+    <p-calendar class="calender" [(ngModel)]="value" [inline]="true"  (onSelect)="calenderIsClicked()"></p-calendar>
+  </div>
+  <app-week-view *ngSwitchCase="'weekComponent'"></app-week-view>
+  <app-day-view *ngSwitchCase="'dayComponent'" [Date]="clickedDate"></app-day-view>
 
 </div>
-
