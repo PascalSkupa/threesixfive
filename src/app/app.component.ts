@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from './login/_models';
 import {Router} from '@angular/router';
 import {AuthenticationService} from './login/_services';
@@ -11,6 +11,7 @@ import {AuthenticationService} from './login/_services';
 export class AppComponent {
   title = 'threesixfive';
   currentUser: User;
+  currentUrl: String;
 
   constructor(
     private router: Router,
@@ -23,5 +24,4 @@ export class AppComponent {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
-
 }

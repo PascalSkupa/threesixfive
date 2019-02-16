@@ -4,7 +4,19 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 
-.plan-header {
+
+#container {
+  display: grid;
+  grid-template-columns: 70px auto;
+  height: 100%;
+
+  #content {
+    padding: 30px 50px;
+
+  }
+}
+
+.plan-header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -64,4 +76,4 @@ body a:hover {
   text-decoration: none;
 }
 
-
+a { cursor: pointer }

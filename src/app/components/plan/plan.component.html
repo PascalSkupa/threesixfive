@@ -1,36 +1,6 @@
-<div class="calender">
-  <mwl-demo-utils-calendar-header
-    [(view)]="view"
-    [(viewDate)]="viewDate">
-  </mwl-demo-utils-calendar-header>
+<div class="plan-container" [ngSwitch] =  >
+  <app-month-view></app-month-view>
 
 
-  <div class="alert alert-info">
-    <div [ngSwitch]="view">
-      <span *ngSwitchCase="'month'"></span>
-      <span *ngSwitchCase="'week'"></span>
-      <span *ngSwitchCase="'day'"></span>
-    </div>
-  </div>
-
-  <div [ngSwitch]="view">
-    <mwl-calendar-month-view
-      *ngSwitchCase="'month'"
-      [viewDate]="viewDate"
-      [events]="events"
-      (dayClicked)="viewDate = $event.day.date;">
-    </mwl-calendar-month-view>
-    <mwl-calendar-week-view
-      *ngSwitchCase="'week'"
-      [viewDate]="viewDate"
-      [events]="events"
-      (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'">
-    </mwl-calendar-week-view>
-
-    <app-day-view  [viewDate]="viewDate.toString()">
-
-    </app-day-view>
-
-
-  </div>
 </div>
+

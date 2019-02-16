@@ -29,7 +29,12 @@ const appRoutes: Routes = [
   { path: 'foodFormular', component: FoodFormularComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '', component: MainApplicationComponent, canActivate: [AuthGuard]},
+  // { path: '', component: MainApplicationComponent, canActivate: [AuthGuard]},
+  { path: '', component: MainApplicationComponent, canActivate: [AuthGuard], children: [
+      { path: 'plan', component: PlanComponent},
+      { path: 'list', component: ListComponent},
+      { path: 'settings', component: SettingsComponent}
+    ]},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' },
