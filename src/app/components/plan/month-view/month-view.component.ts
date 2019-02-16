@@ -9,10 +9,8 @@ export class MonthViewComponent implements OnInit {
 
   private date = new Date();
   month = this.date.toLocaleString('en-us', { month: 'long' });
-
   constructor() { }
 
   ngOnInit() {
   }
-
 }

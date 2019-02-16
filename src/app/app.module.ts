@@ -8,8 +8,6 @@ import {SettingsComponent} from './components/settings/settings.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CalendarModule, DateAdapter} from 'angular-calendar';
-import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {EntryComponent} from './components/list/entry/entry.component';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -17,7 +15,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {GroceryListService} from './services/grocery-list/grocery-list.service';
 import {EntryCreatorComponent} from './components/list/entry-creator/entry-creator.component';
-import {CalendarHeaderComponent} from './components/demo-utils/calendar-header.component';
 import {CheckedEntryComponent} from './components/list/checked-entry/checked-entry.component';
 import {DayViewComponent} from './components/plan/day-view/day-view.component';
 import {RecipeViewComponent} from './components/recipe-view/recipe-view.component';
@@ -25,8 +22,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {MatDialogModule} from '@angular/material/dialog';
 import {CardModule} from 'primeng/card';
+import {CalendarModule} from 'primeng/calendar';
 
 
 // used to create fake backend
@@ -54,7 +51,6 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
     SettingsComponent,
     EntryComponent,
     EntryCreatorComponent,
-    CalendarHeaderComponent,
     CheckedEntryComponent,
     DayViewComponent,
     RecipeViewComponent,
@@ -80,10 +76,7 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
     ReactiveFormsModule,
     HttpClientModule,
     CardModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    })
+    CalendarModule
   ],
   providers: [GroceryListService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -92,7 +85,7 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
     // provider used to create fake backend
     fakeBackendProvider],
   bootstrap: [AppComponent],
-  exports: [PlanComponent, CalendarHeaderComponent],
+  exports: [PlanComponent],
 
 })
 export class AppModule {
