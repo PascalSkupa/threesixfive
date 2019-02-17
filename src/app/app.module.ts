@@ -38,7 +38,6 @@ import { RegisterComponent } from './login/register';
 import { MainApplicationComponent } from './components/main-application/main-application.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { FoodFormularComponent } from './food-formular/food-formular.component';
-import { MonthViewComponent } from './components/plan/month-view/month-view.component';
 import { WeekViewComponent } from './components/plan/week-view/week-view.component';
 
 
@@ -61,7 +60,6 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
     MainApplicationComponent,
     TopbarComponent,
     FoodFormularComponent,
-    MonthViewComponent,
     WeekViewComponent
   ],
   imports: [
