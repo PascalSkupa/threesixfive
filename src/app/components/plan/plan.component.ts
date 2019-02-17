@@ -3,13 +3,23 @@ import {
   OnInit,
 } from '@angular/core';
 import {PlanService} from '../../services/plan/plan.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
   selector: 'app-plan',
   // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './plan.component.html',
-  styleUrls: ['./plan.component.scss']
+  styleUrls: ['./plan.component.scss'],
+  animations: [
+    trigger('enterTrigger', [
+      state('fadeIn', style({
+        opacity: '1',
+        // transform: 'translateY(50%)'
+      })),
+      transition('void => *', [style({opacity: '0'}), animate('1000ms')])
+    ])
+  ]
 })
 
 export class PlanComponent implements OnInit {

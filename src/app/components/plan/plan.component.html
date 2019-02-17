@@ -4,7 +4,7 @@
 
   <!--<app-month-view *ngSwitchCase="'monthComponent'">-->
   <!--</app-month-view>-->
-  <div  *ngSwitchCase="'monthComponent'">
+  <div  *ngSwitchCase="'monthComponent'"  [@enterTrigger]="'fadeIn'">
     <p-calendar class="calender" [(ngModel)]="value" [inline]="true"  (onSelect)="calenderIsClicked()"></p-calendar>
   </div>
   <app-week-view *ngSwitchCase="'weekComponent'"></app-week-view>
