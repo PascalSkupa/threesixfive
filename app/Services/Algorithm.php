@@ -32,7 +32,7 @@ class Algorithm
             'main dish' => [
                 'count' => 0,
                 'totalResults' => (int)FatSecret::searchRecipes('', 0, 1, 'main dish')['recipes']['total_results'],
-                'type' => 'main_dish',
+                'type' => 'main dish',
                 'days' => []
             ],
             'snack' => [

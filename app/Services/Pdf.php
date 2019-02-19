@@ -6,7 +6,7 @@ use Elibyy\TCPDF\Facades\TCPDF;
 
 class Pdf
 {
-    
+
     private $pdf;
 
     public function __construct()
@@ -22,22 +22,49 @@ class Pdf
         $this->pdf::setPrintHeader(false);
         $this->pdf::setPrintFooter(false);
 
-        $this->pdf::SetFont('Helvetica', 'BI', 20);
+        $this->pdf::SetFont('Helvetica', 'BI', 10);
 
         $this->pdf::SetMargins(15, 15, 15, true);
         $this->pdf::SetAutoPageBreak(true, 15);
     }
 
-    public function generate()
+    public function generate($weekPlan)
     {
         $this->pdf::AddPage('L');
 
-        $txt = 'Hello World';
+        $html = '<table>
+                    <tr>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                        <th>Sunday</th>
+                    </tr>
+                    ' . $this->generateHTMLTable($weekPlan) . '
+                 </table>';
 
-        $this->pdf::Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
+        $this->pdf::writeHTML($html, true, false, false, false, 'C');
 
         $this->pdf::Output('test.pdf', 'D');
+    }
 
+    private function generateHTMLTable($weekplan)
+    {
+        $table = '';
+
+        foreach (['breakfast', 'lunch', 'main_dish', 'snack'] as $type) {
+            $table .= '<tr>';
+
+            foreach ($weekplan as $day) {
+                $table .= '<th>' . $day[$type] . '</th>';
+            }
+
+            $table .= '</tr>';
+        }
+
+        return $table;
     }
 
 }

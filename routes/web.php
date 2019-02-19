@@ -18,27 +18,27 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
 
     // Get all users with http://localhost:8000/api/users
-    $router->get('users/all', ['uses' => 'UsersController@showAllUsers']);
+    $router->get('users', ['uses' => 'UsersController@showAllUsers']);
 
     // Get user who is requesting with http://localhost:8000/api/users
-    $router->get('users', ['uses' => 'UsersController@showOneUser']);
+    $router->get('user', ['uses' => 'UsersController@showOneUser']);
 
     // Login with http://localhost:8000/api/login
     $router->post('login', ['uses' => 'UsersController@login']);
 
     // Create user with http://localhost:8000/api/users
-    $router->post('users', ['uses' => 'UsersController@create']);
+    $router->post('user', ['uses' => 'UsersController@create']);
 
     // Delete user with http://localhost:8000/api/users/id
-    $router->delete('users', ['uses' => 'UsersController@delete']);
+    $router->delete('user', ['uses' => 'UsersController@delete']);
 
     // Update user with http://localhost:8000/api/users/id
-    $router->put('users', ['uses' => 'UsersController@update']);
+    $router->put('user', ['uses' => 'UsersController@update']);
 
 
 
     // Get menu from one specific user with http://localhost:8000/api/menu/userid
-    $router->get('menu/{year}/{week}', ['uses' => 'MenuController@getMenu']);
+    $router->get('week/{year}/{week}', ['uses' => 'MenuController@getMenu']);
 
     // Generate menu for one specific user with http://localhost:8000/api/algorithm/generate/userid
     $router->post('form', ['uses' => 'AlgorithmController@generateAlgorithm']);
@@ -56,7 +56,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     // Generate Pdf file of one week for one user with http://localhost:8000/api/pdf/userid/week
-    $router->get('pdf/{week}', ['uses' => 'PdfController@generateWeekPlan']);
+    $router->get('pdf/{year}/{week}', ['uses' => 'PdfController@generateWeekPlan']);
 
 
 
