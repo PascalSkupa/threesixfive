@@ -9,9 +9,9 @@ import {AuthenticationService} from './login/_services';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'threesixfive';
+
   currentUser: User;
-  currentUrl: String;
+
 
   constructor(
     private router: Router,
@@ -20,8 +20,5 @@ export class AppComponent {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
-  logout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
-  }
+
 }

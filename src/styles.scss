@@ -1,22 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-/* angular-cli file: src/styles.css */
-@import "../node_modules/angular-calendar/css/angular-calendar.css";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-
-
-#container {
-  display: grid;
-  grid-template-columns: 70px auto;
-  height: 100%;
-
-  #content {
-    padding: 30px 50px;
-
-  }
-}
-
-.plan-header{
+.plan-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -32,8 +15,13 @@
 html, body {
   min-height: 100%;
   background-color: #dedede;
+  margin: 0;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+.container{
+  margin: 20px;
+}
 
 a {
   cursor: pointer
@@ -72,8 +60,26 @@ body a {
   text-decoration: none;
 }
 body a:hover {
-  color: #067B7D;
+  color: #067B7D !important;
   text-decoration: none;
 }
 
-a { cursor: pointer }
+.btn-link {
+  font-weight: 300;
+  color: #dedede;
+  background-color: transparent;
+  font-size: 14px;
+}
+
+
+//Container
+
+
+
+//TopBar
+.ui-menubar{
+  border: none !important;
+  border-top: 5px solid #F8B735 !important;
+  border-radius: 0px !important;
+}
+

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {PlanComponent} from './components/plan/plan.component';
 import {ListComponent} from './components/list/list.component';
 import {SettingsComponent} from './components/settings/settings.component';
@@ -27,8 +26,11 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
-import {CardModule} from 'primeng/card';
 import {CalendarModule} from 'primeng/calendar';
+import {MenubarModule} from 'primeng/menubar';
+import {MenuItem} from 'primeng/api';
+import {SliderModule} from 'primeng/slider';
+import {CheckboxModule} from 'primeng/checkbox';
 
 
 // used to create fake backend
@@ -50,7 +52,6 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent,
     PlanComponent,
     ListComponent,
     SettingsComponent,
@@ -85,7 +86,10 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
     ButtonModule,
     InputTextModule,
     CardModule,
-    CalendarModule
+    MenubarModule,
+    CalendarModule,
+    SliderModule,
+    CheckboxModule
   ],
   providers: [GroceryListService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
