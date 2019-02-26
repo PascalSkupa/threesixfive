@@ -25,13 +25,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {CardModule} from 'primeng/card';
 import {CalendarModule} from 'primeng/calendar';
 
-
 // used to create fake backend
 import { fakeBackendProvider } from './login/_helpers';
 
 
 import { AlertComponent } from './login/_components';
-import { JwtInterceptor, ErrorInterceptor } from './login/_helpers';
+// import { JwtInterceptor, ErrorInterceptor } from './login/_helpers';
 import { HomeComponent } from './login/home';
 import { LoginComponent } from './login/login';
 import { RegisterComponent } from './login/register';
@@ -77,8 +76,8 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
     CalendarModule
   ],
   providers: [GroceryListService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
     fakeBackendProvider],

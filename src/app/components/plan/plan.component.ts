@@ -23,19 +23,32 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 
 export class PlanComponent implements OnInit {
+  en: any;
   clickedDate;
   key = this.service.actualView;
-  private date = new Date();
-  month = this.date.toLocaleString('en-us', { month: 'long' });
-  value;
+  private actualDate = new Date();
+  dateValue;
+
   constructor(private service: PlanService) {
   }
 
   ngOnInit() {
-
+    this.en = {
+      firstDayOfWeek: 0,
+      dayNames: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      dayNamesShort: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', ],
+      dayNamesMin: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+      monthNames: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+        'September', 'October', 'November', 'December' ],
+      monthNamesShort: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
+      today: 'Today',
+      clear: 'Clear',
+      dateFormat: 'dd/mm/yy'
+    };
   }
+
   calenderIsClicked() {
-    this.service.dayIsClicked(this.value);
+    this.service.dayIsClicked(this.dateValue);
     this.clickedDate = this.service.clickedDate;
     console.log(this.clickedDate);
     this.service.viewDay();
@@ -50,9 +63,11 @@ export class PlanComponent implements OnInit {
   // }
 
   viewMonth() {
-    this.clickedDate = this.service.clickedDate;
-    console.log(this.clickedDate);
     this.service.viewMonth();
+    this.key = this.service.actualView;
+  }
+  viewWeek() {
+    this.service.viewWeek();
     this.key = this.service.actualView;
   }
 }

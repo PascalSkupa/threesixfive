@@ -1,13 +1,19 @@
 <!--<button (click)="viewDay()"></button>-->
 <button (click)="viewMonth()">viewMonth</button>
-<div class="plan-container" [ngSwitch] = "key">
+<button (click)="viewWeek()">viewWeek</button>
+
+<div class="plan-container" [ngSwitch]="key">
 
   <!--<app-month-view *ngSwitchCase="'monthComponent'">-->
   <!--</app-month-view>-->
-  <div  *ngSwitchCase="'monthComponent'"  [@enterTrigger]="'fadeIn'">
-    <p-calendar class="calender" [(ngModel)]="value" [inline]="true"  (onSelect)="calenderIsClicked()"></p-calendar>
+  <div *ngSwitchCase="'monthComponent'" [@enterTrigger]="'fadeIn'">
+    <!--<p-calendar class="calender" dateFormat="dd.mm.yy" [(ngModel)]="value" [inline]="true" (onSelect)="calenderIsClicked()"></p-calendar>-->
+    <p-calendar class="calender" dateFormat="dd.mm.yy" [(ngModel)]="dateValue" [inline]="true" (onSelect)="calenderIsClicked()" [touchUI]="true" [locale]="en"></p-calendar>
   </div>
-  <app-week-view *ngSwitchCase="'weekComponent'"></app-week-view>
+  <!--<app-week-view *ngSwitchCase="'weekComponent'" [Date]="actualDate">dedede</app-week-view>-->
   <app-day-view *ngSwitchCase="'dayComponent'" [Date]="clickedDate"></app-day-view>
-
+  <app-week-view *ngSwitchCase="'weekComponent'" [Date]="actualDate">
+  </app-week-view>
 </div>
+
+
