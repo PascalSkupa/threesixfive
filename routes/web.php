@@ -24,10 +24,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('user', ['uses' => 'UsersController@showOneUser']);
 
     // Login with http://localhost:8000/api/login
-    $router->post('login', ['uses' => 'UsersController@login']);
+    $router->post('user/login', ['uses' => 'UsersController@login']);
 
     // Create user with http://localhost:8000/api/users
-    $router->post('user', ['uses' => 'UsersController@create']);
+    $router->post('user/register', ['uses' => 'UsersController@create']);
 
     // Delete user with http://localhost:8000/api/users/id
     $router->delete('user', ['uses' => 'UsersController@delete']);
@@ -37,8 +37,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
 
-    // Get menu from one specific user with http://localhost:8000/api/menu/userid
-    $router->get('week/{year}/{week}', ['uses' => 'MenuController@getMenu']);
+    // Get menu (week) from one specific user with http://localhost:8000/api/menu/userid
+    $router->get('week/{year}/{week}', ['uses' => 'MenuController@getMenuWeek']);
+
+    // Get menu (day) from one specific user with http://localhost:8000/api/menu/userid
+    $router->get('day/{date}', ['uses' => 'MenuController@getMenuDay']);
 
     // Generate menu for one specific user with http://localhost:8000/api/algorithm/generate/userid
     $router->post('form', ['uses' => 'AlgorithmController@generateAlgorithm']);

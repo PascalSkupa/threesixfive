@@ -15,11 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('pk_user_id');
-            $table->string('name');
-            $table->string('lastname');
-            $table->string('title');
-            $table->string('username')->unique();
-            $table->string('email');
+            $table->string('firstName');
+            $table->string('lastName');
+            $table->string('email')->unique();
             $table->string('password');
             $table->String('api_token');
             $table->timestamps();
@@ -33,6 +31,10 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('plans');
+        Schema::dropIfExists('groceries');
+        Schema::dropIfExists('nogo');
+        Schema::dropIfExists('user_diet');
         Schema::dropIfExists('users');
     }
 }

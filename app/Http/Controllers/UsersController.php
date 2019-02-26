@@ -30,15 +30,18 @@ class UsersController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|min:3',
+            'email' => 'required|email',
             'password' => 'required|min:8',
         ]);
 
-        $data = $request->only('username', 'password');
+        $data = $request->only('email', 'password');
 
-        if (($user = User::where('username', '=', $data['username'])->first()) != [] & password_verify($data['password'], User::where('username', '=', $data['username'])->value('password'))) {
-
-            return response()->json($user);
+        if (($user = User::where('email', '=', $data['email'])->first()) != []) {
+            if (password_verify($data['password'], User::where('email', '=', $data['email'])->value('password'))) {
+                return response()->json($user);
+            } else {
+                return response()->json(['Incorrect password' => 406], 406);
+            }
         }
 
         return response()->json(['User not found' => 404], 404);
@@ -46,19 +49,18 @@ class UsersController extends Controller
 
     public function create(Request $request)
     {
-        if ($request->header('create') == 'allowed') {
+        if ($request->header('Accept-Create') == 'Allowed') {
 
             $this->validate($request, [
-                'name' => 'required',
-                'lastname' => 'required',
-                'email' => 'required|email|max:255',
-                'username' => 'required|min:3|unique:users',
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'email' => 'required|email|unique:users|max:255',
                 'password' => 'required|min:8'
             ]);
 
             $input = $request->all();
 
-            $input['password'] = password_hash($input['password'], PASSWORD_DEFAULT);
+            $input['password'] = password_hash($input['password'], PASSWORD_ARGON2I);
             $input['api_token'] = Str::random(60);
 
             $user = User::create($input);
@@ -71,8 +73,19 @@ class UsersController extends Controller
     public function update(Request $request)
     {
         $user = User::findOrFail(Auth::id());
-        $user->update($request->all());
-        return response()->json($user, 200);
+
+        if (isset($request['password'])) {
+            if (password_verify($request['old_password'], User::where('pk_user_id', '=', Auth::id())->value('password'))) {
+                $request['password'] = password_hash($request['password'], PASSWORD_ARGON2I);
+                $user->update($request->all());
+                return response()->json($user, 200);
+            } else {
+                return response()->json(['Old password not set or false' => 406], 406);
+            }
+        } else {
+            $user->update($request->all());
+            return response()->json($user, 200);
+        }
     }
 
     public function delete()

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 trait MenuTrait
 {
-    public function getMenu($year, $week, $json = true)
+    public function getMenuWeek($year, $week, $json = true)
     {
 
         $date = Carbon::now();

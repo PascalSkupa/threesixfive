@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Fatsecret;
 
 class Ingredient
 {
@@ -14,16 +15,31 @@ class Ingredient
 
     private $servings;
 
+    private $measurement;
+
+    private $units;
+
     public function __construct($ingredient)
     {
         $this->id = $ingredient['food_id'];
         $this->name = $ingredient['food_name'];
-        $this->sub_categories = $ingredient['food_sub_categories']['food_sub_category'];
-        $this->servings = $ingredient['servings']['serving'];
+        $this->units = $ingredient['number_of_units'];
+        $this->measurement = $ingredient['measurement_description'];
+
+        $fat = FatSecret::getIngredient($this->id);
+
+        $this->sub_categories = $fat['food']['food_sub_categories']['food_sub_category'];
+
+        $this->servings = $fat['servings']['serving'];
+    }
+
+    public function hasSubCategory($category)
+    {
+        return in_array($category, $this->sub_categories);
     }
 
     /**
-     * @return mixed
+     * @return Integer
      */
     public function getId()
     {
@@ -31,11 +47,27 @@ class Ingredient
     }
 
     /**
-     * @return mixed
+     * @return String
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return String
+     */
+    public function getMeasurement()
+    {
+        return $this->measurement;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUnits()
+    {
+        return $this->units;
     }
 
     /**

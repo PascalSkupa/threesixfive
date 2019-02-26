@@ -22,6 +22,23 @@ class Recipe
 
     private $direction;
 
+    const ALL_ALLERGENS = [
+        'A' => [],
+        'B' => [],
+        'C' => [],
+        'D' => [],
+        'E' => [],
+        'F' => [],
+        'G' => [],
+        'H' => [],
+        'I' => [],
+        'K' => [],
+        'L' => [],
+        'M' => [],
+        'N' => [],
+        'O' => []
+    ];
+
     public function __construct($recipe)
     {
         $this->id = $recipe['recipe_id'];
@@ -31,8 +48,46 @@ class Recipe
         $this->categories = $recipe['recipe_categories']['recipe_category'];
         $this->serving = $recipe['number_of_servings'];
         $this->direction = $recipe['directions']['direction'];
+        $this->ingredients = [];
 
+        foreach ($recipe['ingredients']['ingredient'] as $ingredient) {
+            array_push($this->ingredients, new Ingredient($ingredient));
+        }
+    }
 
+    public function hasAllergen($allergen)
+    {
+        foreach ($this->ingredients as $ingredient) {
+            foreach (Recipe::ALL_ALLERGENS[$allergen] as $subCategory) {
+                if ($ingredient->hasSubCategory($subCategory)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function hasNoGo($nogo)
+    {
+        foreach ($this->ingredients as $ingredient) {
+            if ($ingredient->hasSubCategory($nogo)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasDiet($diet)
+    {
+        foreach ($this->categories as $category) {
+            if ($category == $diet) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
