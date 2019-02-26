@@ -32,20 +32,18 @@ import {MenuItem} from 'primeng/api';
 import {SliderModule} from 'primeng/slider';
 import {CheckboxModule} from 'primeng/checkbox';
 
-
 // used to create fake backend
 import { fakeBackendProvider } from './login/_helpers';
 
 
 import { AlertComponent } from './login/_components';
-import { JwtInterceptor, ErrorInterceptor } from './login/_helpers';
+// import { JwtInterceptor, ErrorInterceptor } from './login/_helpers';
 import { HomeComponent } from './login/home';
 import { LoginComponent } from './login/login';
 import { RegisterComponent } from './login/register';
 import { MainApplicationComponent } from './components/main-application/main-application.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { FoodFormularComponent } from './food-formular/food-formular.component';
-import { MonthViewComponent } from './components/plan/month-view/month-view.component';
 import { WeekViewComponent } from './components/plan/week-view/week-view.component';
 
 
@@ -67,7 +65,6 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
     MainApplicationComponent,
     TopbarComponent,
     FoodFormularComponent,
-    MonthViewComponent,
     WeekViewComponent
   ],
   imports: [
@@ -92,8 +89,8 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
     CheckboxModule
   ],
   providers: [GroceryListService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
     fakeBackendProvider],

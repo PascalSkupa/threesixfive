@@ -24,14 +24,11 @@
     </div>
 
     <div class="form-group">
-        <span class="ui-float-label" style="margin-top: 25px">
-          <input class="float-input" type="text" size="30" pInputText formControlName="username" class="form-control"
-                 [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
-            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-              <div *ngIf="f.username.errors.required">Username is required</div>
-            </div>
-          <label for="username">Username</label>
-        </span>
+        <label for="email">Email</label>
+        <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+        </div>
     </div>
 
     <div class="form-group">

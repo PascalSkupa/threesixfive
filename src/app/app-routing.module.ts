@@ -10,27 +10,16 @@ import {AuthGuard} from './login/_guards';
 import {MainApplicationComponent} from './components/main-application/main-application.component';
 import {FoodFormularComponent} from './food-formular/food-formular.component';
 
-const routes: Routes = [
-  {
-    path: 'plan',
-    component: PlanComponent
-  },
-  {
-    path: 'list',
-    component: ListComponent
-  },
-  {
-    path: 'settings',
-    component: SettingsComponent
-  },
-];
+
 
 const appRoutes: Routes = [
   { path: 'foodFormular', component: FoodFormularComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   // { path: '', component: MainApplicationComponent, canActivate: [AuthGuard]},
-  { path: '', component: MainApplicationComponent, canActivate: [AuthGuard], children: [
+  { path: '', component: MainApplicationComponent,
+    // canActivate: [AuthGuard],
+    children: [
       { path: 'plan', component: PlanComponent},
       { path: 'list', component: ListComponent},
       { path: 'settings', component: SettingsComponent}
