@@ -1,0 +1,19 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width" >
+    <input matInput placeholder="Grocery Name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" >
+    <input type="number" min="0" matInput placeholder="Amount" [(ngModel)]="amount" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select [(value)]="selected" [(ngModel)]="unit"  placeholder="Unit" [ngModelOptions]="{standalone: true}">
+      <mat-option value="litre">litre</mat-option>
+      <mat-option value="gram">gram</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-icon-button (click)="addToList()">
+    <i class="material-icons">add_circle</i>
+  </button>
+</form>
