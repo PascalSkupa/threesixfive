@@ -31,6 +31,9 @@ import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 import {SliderModule} from 'primeng/slider';
 import {CheckboxModule} from 'primeng/checkbox';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 // used to create fake backend
 import { fakeBackendProvider } from './login/_helpers';
@@ -86,7 +89,10 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
     MenubarModule,
     CalendarModule,
     SliderModule,
-    CheckboxModule
+    CheckboxModule,
+    MessageModule,
+    MessagesModule,
+    ToggleButtonModule
   ],
   providers: [GroceryListService,
     // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

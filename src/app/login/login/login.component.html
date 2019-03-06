@@ -1,33 +1,42 @@
-﻿<p-card header="Login" [style]="{width: '360px', margin: '50px auto'}" styleClass="ui-card-shadow">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+﻿<p-card header="Login" [style]="{width: '400px', margin: '50px auto'}" styleClass="ui-card-shadow">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
 
-    <div class="form-group">
-      <span class="ui-float-label" style="margin-top: 25px">
-          <input class="float-input" type="text" size="30" pInputText formControlName="email" class="form-control"
-                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-              <div *ngIf="f.email.errors.required">Email is required</div>
-            </div>
-         <label for="email">Email</label>
-        </span>
+
+    <div class="form-group" style="">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-8">
+            <input pInputText type="email" formControlName="email" placeholder="E-Mail" size="30"/>
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Required"
+                       *ngIf="!loginForm.controls['email'].valid&&loginForm.controls['email'].dirty"></p-message>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <span class="ui-float-label" style="margin-top: 25px">
-          <input class="float-input" type="text" size="30" pInputText formControlName="password" class="form-control"
-                 [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-              <div *ngIf="f.password.errors.required">Password is required</div>
-            </div>
-          <label for="password">Password</label>
-        </span>
+    <div class="form-group" style="">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-8">
+            <input pInputText type="password" formControlName="password" placeholder="Password" size="30"/>
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="min 8 chars"
+                       *ngIf="!loginForm.controls['password'].valid&&loginForm.controls['password'].dirty"></p-message>
+          </div>
+        </div>
+      </div>
     </div>
 
     <p-footer>
       <div class="form-group" style="margin-top: 25px">
-        <button pButton label="Login" icon="pi pi-sign-in" style="margin-right: .45em"></button>
+        <button pButton label="Login" type="submit" icon="pi pi-sign-in" style="margin-right: .45em"
+                [disabled]="!loginForm.valid"></button>
         <a routerLink="/register" class="btn btn-link">Register</a>
       </div>
     </p-footer>
   </form>
 </p-card>
+

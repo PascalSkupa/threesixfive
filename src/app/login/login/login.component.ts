@@ -1,15 +1,17 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { first } from 'rxjs/operators';
 import {AlertService, AuthenticationService} from '../_services';
+import {MessageService} from 'primeng/api';
 
 
-@Component({templateUrl: 'login.component.html'})
+
+@Component({templateUrl: 'login.component.html', providers: [MessageService]})
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
-    submitted = false;
+    submitted: boolean;
     returnUrl: string;
 
     constructor(
@@ -17,7 +19,8 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private messageService: MessageService
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
@@ -27,8 +30,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required]
+            'email': new FormControl('', Validators.required),
+            'password': new FormControl('', Validators.compose([Validators.required, Validators.minLength(8)]))
         });
 
         // get return url from route parameters or default to '/'
@@ -38,8 +41,10 @@ export class LoginComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
-    onSubmit() {
+    onSubmit(value: string) {
         this.submitted = true;
+
+      this.messageService.add({severity: 'info', summary: 'Success', detail: ''});
 
         // stop here if form is invalid
         if (this.loginForm.invalid) {

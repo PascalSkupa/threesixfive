@@ -21,18 +21,7 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    let MyObj;
-    MyObj = { email: 'email',
-    password: 'password'};
-
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'Content-type': 'application/x-www-form-urlencoded'
-      })
-    };
-        return this.http.post(`${environment.apiUrl}/user/login`, MyObj);
+        return this.http.post(`${environment.apiUrl}/user/login`, {email: email, password: password});
     /*return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { email, password })
         .pipe(map(user => {
             // login successful if there's a jwt token in the response

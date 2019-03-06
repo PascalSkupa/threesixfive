@@ -14,13 +14,12 @@
 
 html, body {
   min-height: 100%;
-  background-color: #dedede;
-  margin: 0;
+  background-color: #F5F5F6;
   font-family: "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .container{
-  margin: 20px;
+  margin: 70px;
 }
 
 a {
@@ -42,14 +41,15 @@ body .ui-button {
 }
 body .ui-button:hover {
   margin: 0;
+  margin: 0;
   color: #ffffff;
-  background-color: #067B7D;
+  background-color: #005b5e;
   border: #067B7D;
   font-size: 14px;
   transition: background-color 0.2s, box-shadow 0.2s;
 }
 body .ui-button:enabled:hover {
-  background-color: #067B7D;
+  background-color: #005b5e;
   color: #ffffff;
   border-color: #067B7D;
 }
@@ -60,13 +60,13 @@ body a {
   text-decoration: none;
 }
 body a:hover {
-  color: #067B7D !important;
+  color: black !important;
   text-decoration: none;
 }
 
 .btn-link {
   font-weight: 300;
-  color: #dedede;
+  color: #067B7D;
   background-color: transparent;
   font-size: 14px;
 }
@@ -83,3 +83,17 @@ body a:hover {
   border-radius: 0px !important;
 }
 
+//foodformular
+.form-grid{
+  margin: auto;
+  max-width: 80%;
+  padding-bottom: 1em;
+}
+
+body .ui-chkbox-label {
+  margin: 0 0 0 0em;
+}
+
+.toggleButton{
+  margin: 3px 0 0 0;
+}

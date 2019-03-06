@@ -13,10 +13,11 @@ import {FoodFormularComponent} from './food-formular/food-formular.component';
 
 
 const appRoutes: Routes = [
-  { path: 'foodFormular', component: FoodFormularComponent, canActivate: [AuthGuard] },
+  { path: 'foodFormular', component: FoodFormularComponent
+  // canActivate: [AuthGuard]
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // { path: '', component: MainApplicationComponent, canActivate: [AuthGuard]},
   { path: '', component: MainApplicationComponent,
     // canActivate: [AuthGuard],
     children: [

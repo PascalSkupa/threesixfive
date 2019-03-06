@@ -21,7 +21,7 @@ export class FoodFormularComponent implements OnInit {
   selectedMeals: string;
   selectedDiets: string;
 
-  val1: number;
+  val1 = 1;
 
   selectedDays: string[] = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
 
