@@ -55,6 +55,22 @@ class Recipe
         }
     }
 
+    public function __invoke()
+    {
+        $ingredients = [];
+        foreach ($this->ingredients as $ingredient) {
+            array_push($ingredients, $ingredient());
+        }
+
+        return [
+            'id' => (int)$this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'ingredients' => $ingredients,
+            'directions' => $this->direction
+        ];
+    }
+
     public function hasAllergen($allergen)
     {
         foreach ($this->ingredients as $ingredient) {

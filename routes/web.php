@@ -26,6 +26,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // Login with http://localhost:8000/api/login
     $router->post('user/login', ['uses' => 'UsersController@login']);
 
+    // Logout with http://localhost:8000/api/login
+    $router->post('user/logout', ['uses' => 'UsersController@logout']);
+
     // Create user with http://localhost:8000/api/users
     $router->post('user/register', ['uses' => 'UsersController@create']);
 
@@ -54,7 +57,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('groceries', ['uses' => 'GroceryListController@createIndividualGroceryList']);
 
     // Get grocery list from one specific user with http://localhost:8000/api/grocerylist/userid
-    $router->get('groceries', ['uses' => 'GroceryListController@getGroceryList']);
+    $router->get('groceries', ['uses' => 'GroceryListController@getCurrentGroceryList']);
 
 
 

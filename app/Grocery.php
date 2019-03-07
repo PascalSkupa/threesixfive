@@ -13,7 +13,7 @@ class Grocery extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'fk_user_id', 'serving', 'checked',
+        'name', 'fk_user_id', 'serving', 'measurement', 'checked', 'generated',
     ];
     
     protected $hidden = [

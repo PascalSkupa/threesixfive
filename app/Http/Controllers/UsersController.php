@@ -47,6 +47,16 @@ class UsersController extends Controller
         return response()->json(['User not found' => 404], 404);
     }
 
+    public function logout(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email'
+
+        ]);
+
+        $data = $request->only('email');
+    }
+
     public function create(Request $request)
     {
         if ($request->header('Accept-Create') == 'Allowed') {

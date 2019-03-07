@@ -72,31 +72,25 @@ class Algorithm
     {
         $weekPlan = null;
 
-        /*foreach ($this->recipe_types as $item) {
-            $page = rand(1, (int)$item['totalResults'] / 50);
-            $recipes = FatSecret::searchRecipes('', $page, 50, $item['type'])['recipes']['recipe'];
-            $numbers = $this->randomSet(sizeof($recipes), sizeof($recipes));
-
-            for ($i = 0, $num = 0; $i < sizeof($item['days']); $i++, $num++) {
-                if ($this->checkRecipe((int)$recipes[$numbers[$i]]['recipe_id'], $this->allergens, $this->nogos, $this->diets)) {
-                    $weekPlan[$item['days'][$i]][$item['type']] = (int)$recipes[$numbers[$num]]['recipe_id'];
-                } else {
-                    $i--;
-                }
-                sleep(1);
-            }
-        }*/
-
         foreach ($this->recipe_types as $recipe_type) {
             for ($i = 0, $num = 0, $new_page = true; $i < sizeof($recipe_type['days']); $i++, $num++) {
                 if ($new_page) {
                     $current_page = rand(1, (int)$recipe_type['totalResults'] / 50);
                     $recipes = FatSecret::searchRecipes('', $current_page, 50, $recipe_type['type'])['recipes']['recipe'];
-                    $numbers = shuffle(range(0, sizeof($recipes) - 1));
+                    $numbers = range(0, sizeof($recipes) - 1);
+                    shuffle($numbers);
                     $new_page = false;
                 }
 
+                if ($i == sizeof($recipes) - 1) {
+                    $new_page = true;
+                } elseif ($recipe = $this->checkRecipe((int)$recipes[$numbers[$i]]['recipe_id'], $this->allergens, $this->nogos, $this->diets)) {
+                    $weekPlan[$recipe_type['days'][$i]][$recipe_type['type']] = $recipe();
+                } else {
+                    $i--;
+                }
 
+                sleep(1);
             }
         }
 
@@ -116,30 +110,30 @@ class Algorithm
             ['Sunday', Carbon::now()->endOfWeek()->format('Y-m-d')]
         ];
 
-        foreach ($week as $weekday) {
-            if (array_key_exists($weekday[0], $weekPlan)) {
-                $response[$weekday[0]] = $weekPlan[$weekday[0]];
+        foreach ($week as $weekDay) {
+            if (array_key_exists($weekDay[0], $weekPlan)) {
+                $response[$weekDay[0]] = $weekPlan[$weekDay[0]];
                 $input = [
-                    'pk_date' => $weekday[1],
+                    'pk_date' => $weekDay[1],
                     'pk_fk_user_id' => (int)Auth::id(),
-                    'weekday' => $weekday[0],
-                    'breakfast' => $weekPlan[$weekday[0]]['breakfast'],
-                    'lunch' => $weekPlan[$weekday[0]]['lunch'],
-                    'main_dish' => $weekPlan[$weekday[0]]['main dish'],
-                    'snack' => $weekPlan[$weekday[0]]['snack']
+                    'weekday' => $weekDay[0],
+                    'breakfast' => $weekPlan[$weekDay[0]]['breakfast']['id'],
+                    'lunch' => $weekPlan[$weekDay[0]]['lunch']['id'],
+                    'main_dish' => $weekPlan[$weekDay[0]]['main dish']['id'],
+                    'snack' => $weekPlan[$weekDay[0]]['snack']['id']
                 ];
 
                 Plan::create($input);
             } else {
-                $response[$weekday[0]]['breakfast'] = null;
-                $response[$weekday[0]]['lunch'] = null;
-                $response[$weekday[0]]['main_dish'] = null;
-                $response[$weekday[0]]['snack'] = null;
+                $response[$weekDay[0]]['breakfast'] = null;
+                $response[$weekDay[0]]['lunch'] = null;
+                $response[$weekDay[0]]['main_dish'] = null;
+                $response[$weekDay[0]]['snack'] = null;
 
                 Plan::create([
-                    'pk_date' => $weekday[1],
+                    'pk_date' => $weekDay[1],
                     'pk_fk_user_id' => (int)Auth::id(),
-                    'weekday' => $weekday[0],
+                    'weekday' => $weekDay[0],
                     'breakfast' => null,
                     'lunch' => null,
                     'main_dish' => null,
@@ -174,28 +168,6 @@ class Algorithm
         }
 
         return $recipe;
-
-        /*$ingredients = Fatsecret::getRecipe($recipe_id)['recipe']['ingredients']['ingredient'];
-
-        foreach ($ingredients as $ingredient) {
-            if (isset($ingredient['food_id'])) {
-                $food = FatSecret::getIngredient($ingredient['food_id']);
-                if (isset($food['food']['food_sub_categories']['food_sub_category'])) {
-                    if (is_array($food['food']['food_sub_categories']['food_sub_category'])) {
-                        foreach (($food['food']['food_sub_categories']['food_sub_category']) as $sub_category) {
-                            if (in_array($sub_category, $nogos)) {
-                                return false;
-                            }
-                        }
-                    }
-
-                    return true;
-                }
-            }
-            sleep(1);
-        }
-
-        return false;*/
     }
 
     public function checkHistory($recipe_id)
