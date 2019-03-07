@@ -19,6 +19,6 @@ class Allergen extends Model
     protected $primaryKey = 'pk_allergen_id';
     
     public function plan() {
-        return $this->hasMany('App\NoGo');
+        return $this->hasMany('App\Nogo');
     }
 }

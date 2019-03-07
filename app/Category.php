@@ -19,6 +19,6 @@ class Category extends Model
     protected $primaryKey = 'pk_category_id';
     
     public function plan() {
-        return $this->hasMany('App\NoGo');
+        return $this->hasMany('App\Nogo');
     }
 }

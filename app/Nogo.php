@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class NoGo extends Model
+class Nogo extends Model
 {
     public $timestamps = false;
 

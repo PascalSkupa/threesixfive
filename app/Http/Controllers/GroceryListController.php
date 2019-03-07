@@ -9,7 +9,6 @@ use Carbon\Carbon;
 use FatSecret;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function Sodium\increment;
 
 class GroceryListController extends Controller
 {
@@ -28,11 +27,9 @@ class GroceryListController extends Controller
         $today = Carbon::now()->format('Y-m-d');
         $sunday = Carbon::parse('next sunday')->format('Y-m-d');
 
-        if (!($groceries_users = Grocery::where('fk_user_id', '=', Auth::id())->get(['name', 'serving', 'checked', 'generated'])->isEmpty())) {
-            if ($groceries_users->search(function ($item, $key) {
-                return $item->generated = true;
-            })) {
-                if (!($plan = Plan::where('pk_fk_user_id', '=', Auth::id())->whereBetween('pk_date', [$today, $sunday])->get(['breakfast', 'lunch', 'main_dish', 'snack'])->isEmpty())) {
+        if (!($groceries_users = Grocery::where('fk_user_id', '=', Auth::id())->get(['name', 'serving', 'measurement', 'checked', 'generated']))->isEmpty()) {
+            if ($groceries_users->where('generated', true)->isEmpty()) {
+                if (!($plan = Plan::where('pk_fk_user_id', '=', Auth::id())->whereBetween('pk_date', [$today, $sunday])->get(['breakfast', 'lunch', 'main_dish', 'snack']))->isEmpty()) {
                     foreach ($plan as $item) {
                         foreach (['breakfast', 'lunch', 'main_dish', 'snack'] as $type) {
                             if (($recipe_id = $item[$type]) != null) {
@@ -47,17 +44,15 @@ class GroceryListController extends Controller
                                             'generated' => true
                                         ];
 
-                                        return response()->json($input);
-
                                         $groceries_users->push($input);
 
                                         $input['fk_user_id'] = Auth::id();
                                         Grocery::create($input);
                                     } else {
-                                        /*$grams = $ingredient->getGrams($ingredient->getMeasurement());
+                                        $grams = $ingredient->getGrams($ingredient->getMeasurement());
                                         $currentGrams = Grocery::where('name', $ingredient->getName())->value('serving');
 
-                                        Grocery::where('name', $ingredient->getName())->update(['serving' => $currentGrams + $grams]);*/
+                                        Grocery::where('name', $ingredient->getName())->update(['serving' => $currentGrams + $grams]);
                                     }
                                 }
                             }
@@ -70,28 +65,24 @@ class GroceryListController extends Controller
         return response()->json($groceries_users);
     }
 
-    private function checkCollection($collection)
-    {
-        foreach ($collection as $item) {
-            if ($item->generated === true) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     public function getNextGroceryList()
     {
+        $nextMonday = (new Carbon('next Monday'))->format('Y-m-d');
+        $nextSunday = (new Carbon('next Monday'))->endOfWeek()->format('Y-m-d');
 
+        if (!($nextWeek = Plan::where('pk_fk_user_id', '=', Auth::id())->whereBetween('pk_date', [$nextMonday, $nextSunday])->get(['breakfast', 'lunch', 'main_dish', 'snack']))->isEmpty()) {
+            return response()->json($nextWeek);
+        } else {
+            return response()->json(['The plan for the next week is not generated yet.' => 428], 428);
+        }
     }
 
     public function createIndividualGroceryList(Request $request)
     {
-
         $this->validate($request, [
             'name' => 'required',
             'serving' => 'required',
+            'measurement' => 'required',
             'checked' => 'required'
         ]);
 
@@ -103,6 +94,5 @@ class GroceryListController extends Controller
         $grocery = Grocery::create($input);
 
         return response()->json($grocery, 201);
-
     }
 }

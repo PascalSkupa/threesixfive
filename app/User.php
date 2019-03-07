@@ -32,7 +32,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
     
     public function nogo() {
-        return $this->hasMany('App\NoGo');
+        return $this->hasMany('App\Nogo');
     }
     
     public function user_diet() {

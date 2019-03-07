@@ -14,7 +14,7 @@ class UserDiet extends Model
      * @var array
      */
     protected $fillable = [
-        'pk_fk_d_user_id', 'pk_fk_u_diet_id', 
+        'pk_fk_d_user_id', 'pk_fk_u_diets_id',
     ];
     
     protected $primaryKey = 'pk_fk_d_user_id';

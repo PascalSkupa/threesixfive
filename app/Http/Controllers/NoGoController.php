@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\NoGo;
+use App\Nogo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,20 +22,20 @@ class NoGoController extends Controller
             'which' => 'required'
         ]);
     
-        $nogo = NoGo::create($request->all());
+        $nogo = Nogo::create($request->all());
             return response()->json($nogo, 201);
     }
     
     public function update(Request $request)
     {
-        $nogo = NoGo::findOrFail(Auth::id());
+        $nogo = Nogo::findOrFail(Auth::id());
         $nogo->update($request->all());
             return response()->json($nogo, 200);
     }
     
     public function delete()
     {
-        NoGo::findOrFail(Auth::id())->delete();
+        Nogo::findOrFail(Auth::id())->delete();
         return response('Deleted Successfully', 200);
     }
 }

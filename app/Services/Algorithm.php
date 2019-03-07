@@ -2,7 +2,12 @@
 
 namespace App\Services;
 
+use App\Allergen;
+use App\Category;
+use App\Diet;
+use App\Nogo;
 use App\Recipe;
+use App\UserDiet;
 use Fatsecret;
 use Carbon\Carbon;
 use App\Plan;
@@ -14,9 +19,9 @@ class Algorithm
     private $recipe_types;
     private $diets;
     private $allergens;
-    private $nogos;
+    private $categories;
 
-    public function __construct($plan, $allergens, $nogos, $diets)
+    public function __construct($plan, $allergens, $categories, $diets)
     {
         $this->recipe_types = [
             'breakfast' => [
@@ -45,7 +50,7 @@ class Algorithm
             ]
         ];
         $this->allergens = $allergens;
-        $this->nogos = $nogos;
+        $this->categories = $categories;
         $this->diets = $diets;
 
         foreach ($plan as $weekday) {
@@ -84,7 +89,7 @@ class Algorithm
 
                 if ($i == sizeof($recipes) - 1) {
                     $new_page = true;
-                } elseif ($recipe = $this->checkRecipe((int)$recipes[$numbers[$i]]['recipe_id'], $this->allergens, $this->nogos, $this->diets)) {
+                } elseif ($recipe = $this->checkRecipe((int)$recipes[$numbers[$i]]['recipe_id'], $this->allergens, $this->categories, $this->diets)) {
                     $weekPlan[$recipe_type['days'][$i]][$recipe_type['type']] = $recipe();
                 } else {
                     $i--;
@@ -97,7 +102,7 @@ class Algorithm
         return $weekPlan;
     }
 
-    public function saveWeek($weekPlan)
+    public function saveWeek($weekPlan, $week)
     {
         $response = null;
         $week = [
@@ -145,22 +150,62 @@ class Algorithm
         return $response;
     }
 
-    private function checkRecipe($recipe_id, $allergens, $nogos, $diets)
+    public function saveUserPreferences()
+    {
+        // Diets
+        foreach ($this->diets as $diet) {
+            $diet_id = Diet::where('description', $diet)->value('pk_diet_id');
+
+            UserDiet::create([
+                'pk_fk_d_user_id' => Auth::id(),
+                'pk_fk_u_diets_id' => $diet_id
+            ]);
+        }
+
+        // Allergens
+        foreach ($this->allergens as $allergen) {
+            $allergen_id = Allergen::where('description', $allergen)->value('pk_allergen_id');
+
+            Nogo::create([
+                'fk_n_user_id' => Auth::id(),
+                'fk_object' => $allergen_id,
+                'which' => 'allergen'
+            ]);
+        }
+
+        // NoGos
+        foreach ($this->categories as $category) {
+            $category_id = Category::where('name', $category)->value('pk_category_id');
+
+            Nogo::create([
+                'fk_n_user_id' => Auth::id(),
+                'fk_object' => $category_id,
+                'which' => 'category'
+            ]);
+        }
+
+        return true;
+    }
+
+    private function checkRecipe($recipe_id, $allergens, $categories, $diets)
     {
         $recipe = new Recipe(Fatsecret::getRecipe($recipe_id)['recipe']);
 
+        // Check allergens
         foreach ($allergens as $allergen) {
             if ($recipe->hasAllergen($allergen)) {
                 return false;
             }
         }
 
-        foreach ($nogos as $nogo) {
-            if ($recipe->hasNoGo($nogo)) {
+        // Check categories
+        foreach ($categories as $category) {
+            if ($recipe->hasNoGo($category)) {
                 return false;
             }
         }
 
+        // Check diets
         foreach ($diets as $diet) {
             if ($recipe->hasDiet($diet)) {
                 return false;
