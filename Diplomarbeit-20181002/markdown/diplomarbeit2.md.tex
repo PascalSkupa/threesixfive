@@ -1,0 +1,100 @@
+\hypertarget{kapitel-aus-der-anderen-datei}{%
+\section{Kapitel aus der anderen
+Datei}\label{kapitel-aus-der-anderen-datei}}
+
+Dieses Kapitel wurde als \emph{diplomarbeit2.md} geschrieben und dann
+mit \emph{pandoc} in \TeX~umgewandelt.
+
+\begin{lstlisting}[language=bash]
+pandoc --listings -s diplomarbeit2.md -o diplomarbeit2.tex 
+\end{lstlisting}
+
+Wie man sieht ist das ganz einfach, sogar Listings sind möglich. Weitere
+Optionen sind möglich bzw. sinnvoll -- siehe Kapitel \ref{skripts},
+Seite \pageref{skripts}. Man beachte die von Pandoc automatisch
+generierten Label für Querverweise.
+
+Vorschlag zur Durchführung:
+
+\begin{itemize}
+\tightlist
+\item
+  ein Ordner mit den Pandoc-Dateien
+\item
+  ein Skript/Batch-Datei erzeugt daraus die Latex-Dateien
+
+  \begin{itemize}
+  \tightlist
+  \item
+    in einem neuen Ordner -- das erhöht die Übersichtlichkeit
+  \end{itemize}
+\item
+  die Latex-Dateien werden dann in das Hauptdokument eingebunden
+\end{itemize}
+
+Und nun zu einem Bild. Floating Elemente können auch auf der nächsten
+Seite sein, ein Verweis auf das Bild ist deshalb sinnvoll: siehe Bild
+\ref{Bild1} oder siehe \abb{Bild1}.
+
+\begin{figure}
+\centering
+\includegraphics{HTL3RLogo.png}
+\caption{Der Text steht unterhalb\label{Bild1}}
+\end{figure}
+
+Man kann auch die Breite aber auch angeben.
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm,height=\textheight]{HTL3RLogo.png}
+\caption{Das kleinere Bild}
+\end{figure}
+
+Oder ganz klein (Bild \ref{Bild3}).
+
+\begin{figure}
+\centering
+\includegraphics[width=2cm,height=\textheight]{HTL3RLogo.png}
+\caption{Das ganz kleine Bild\label{Bild3}}
+\end{figure}
+
+Auch Listen sind kein Problem, wichtig sind nur Leerzeilen zwischen den
+Listenpunkten. Hier sieht man eine einfache Aufzählung.
+
+\begin{itemize}
+\item
+  wichtig
+\item
+  auch ganz lange Texte können bei Listen geschrieben werden.
+
+  Sogar mehrere Absätze sind möglich.
+\item
+  Ende der Liste.
+\end{itemize}
+
+Welches Zeichen am Anfang der Liste steht ist dabei leicht einzustellen,
+im \emph{pandoc} Manual gibt es nähere Infos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  eins
+\item
+  zwei
+
+  \begin{enumerate}
+  \def\labelenumii{\roman{enumii}.}
+  \tightlist
+  \item
+    zwei eins -- Mindestens 4 Zeichen eingerückt
+  \item
+    zwei zwei
+  \end{enumerate}
+\item
+  drei. \emph{Pandoc} zählt richtig, das Zeichen am Anfang der Zeile ist
+  nur ein Muster!
+\end{enumerate}
+
+Mit den richtigen Optionen werden URLs automatisch richtig dargestellt
+und sind im fertigen Pdf auch \emph{klickbar}:
+\url{http://pandoc.org/README.html}

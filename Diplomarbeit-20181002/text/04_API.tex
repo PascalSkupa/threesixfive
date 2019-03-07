@@ -1,0 +1,51 @@
+\section{Woher die Rezepte?}
+Es gibt zwei Möglichkeiten die notwendigen Daten für die Rezepte zu sammeln und diese abzuspeichern. Das selbstständige Schreiben der Rezepte in einer Projekteigenen Datenbank oder das Einbinden einer Rezeptdatenbank aus dem Internet. Die Erste fiel weg, da der Aufwand alle Rezepte abzutippen und richtig zu formatieren zu groß wäre. Zusätzlich würde man die Nutzungs-, Verbreitungs-, und Veröffentlichungsrechte für die Rezepte brauchen. Sollten diese aus einem Kochbuch kommen, wäre dies kompliziert und sehr aufwändig geworden.
+Somit fiel die Wahl auf eine Rezeptdatenbank, die Rezepte sind direkt verfügbar, die Verbindung ist leicht herzustellen und die Benutzerrechte sind klar geregelt.
+
+Der Zugriff soll mit Hilfe einer API\cite{apidef} erfolgen.
+
+Eine API, Application Programming Interface, ist eine Schnittstelle, die einen für alle Komponenten lesbaren Datenaustausch ermöglicht. Das macht es für komplizierte Anwendungen leichter zwischen den einzelnen Bestandteilen zu kommunizieren und den Programmieren diese zu warten. Dabei werden Module separiert und interagieren miteinander über eine API um somit die vielfältige Anwendbarkeit, leichtere Fehlerkorrektur und problemlose Erweiterungen zu ermöglichen.
+
+Im Fall der 365 Speiseplan Anwendung sind diese Module der Algorithmus, die interne Datenbank mit der Userverwaltung und der Zwischenspeicherung sowie die Rezeptdatenbank. Die Rezepte werden automatisch durch schon von der Webseite vorgegebene und in den API Request (Zugriff) eingebunden Funktionen aus der Datenbank ausgelesen und sortiert. Die Daten werden von einem Anbieter eventuell kostenpflichtig zu Verfügung gestellt und können, wenn man eine Lizenz besitzt, in den Kochplan eingebaut werden.
+
+\section{Rezeptdatenbanken mit APIs im Vergleich}
+
+Die wichtigsten Entscheidungskriterien sind der Umfang der Rezepte, die Anzahl der erlaubten Zugriffe und der Preis für Schulgruppen und Non-Profit-Organisationen.
+
+\input{text/04_1_Tabelle.tex}
+
+Zusätlich wurde die Billa AG bezüglich ihrer Rezeptdatenbank kontaktiert. Sie bieten keine Datenbank für öffentliche Verwendung an. 
+
+\subsection{Entscheidung}
+
+Nach einer Bewertung und genauer Evaluierung aller Angaben ist die Entscheidung auf die "FatSecret API" gefallen. Die Basic Version ermöglicht den vollen Zugriff auf alle, in ihrer Datenbank vorhandenen, Rezepte und bietet die meisten gratis Zugriffe an. 
+\paragraph{PREMIER Free}
+Zusätzlich wurde der Support von FatSecret kontaktiert und bezüglich einer "PREMIER Free" Version nachgefragt. Diese Version bietet alle Premium-Funktionen der US-Datenbank an.
+Mit einem Formular, dass der Schuldirektor, Dipl.-Ing Gerhard Jüngling, ausgefüllt und unterzeichnet hat, konnte die PREMIER Free Version beantragt werden. In wenigen Tagen wurde der FatSecret Account von 365 von Basic auf PREMIER Free hochgestufft.
+
+\subsubsection{Rechtliche Bedingungen}
+
+FatSecret bietet ein "PREMIER Free" Paket für Startups, Non-Profits und Studenten an. Um den Zugriff zu bekommen muss folgendes bestätigt, in unserem Fall vom Schuldirektor, und eingehalten werden:
+
+\begin{itemize}
+\item Das Team besteht nicht länger als 2 Jahre.
+\item Der Gewinn, der vom Team durch dieses Projekt in der Zukunft gemacht werden kann, darf die Höhe von 1 Million USD nicht übersteigen.
+\end{itemize}
+
+\section{FatSecret Schnittstellen}
+
+Mit einem Zugangsschlüssel \cite{fatsecretJS}, den man nach der Anmeldung auf der FatSecret API Webseite erhält, kann man mit Hilfe der zu Verfügung gestellten API auf die Datensätze zugreifen. Für den Zugriff gibt es zwei Optionen, JavaScript API und REST API.
+\subsection{JavaScript}
+Der Zugriff über die JavaScript API beinhaltet viele Funktionen für Nährstoffe, Bewegungstracking und Gewichtskontrolle. Dabei kann man das grafische Interface der FatSecret Anwendung direkt in die Webseite einbinden. Zusätzlich werden Funktionen mitgeliefert, mit denen man das Layout anpassen kann. Um die Applikation einzubinden, muss man den JavaScript-Link in ein Script-Tag schreiben \codeword{ <script src="http://platform.fatsecret.com/js?key=XXX&auto_load=true"></script>}. Durch das Hinzufügen des Abfrageparameters \codeword{"auto_load = true"} wird die Komponente automatisch geladen und den Benutzern in der Position angezeigt, in der dieses Skripttag auf der Webseite platziert ist. Zu beachten ist, dass jeder Verweis auf "http://platform.fatsecret.com/js" einen gültigen Zugriffsschlüssel enthalten muss, dieser muss an die URL angehängt werden. Den Schlüssel bekommt man nach der Anmeldung auf der FatSecret-API-Plattform.  
+
+Das Problem darin ist, dass die Anwendung, mit einer zum großen Teil vorgegebenen Formatierung, direkt in die Webseite eingebunden wird. Das bedeutet, dass man nur sehr schwer Rezepte und vor allem die Kalenderansicht in dem gewünschten Format darstellen kann. Eine Lösung dafür ist der direkte Zugriff auf die Daten und das Holen von reinen JSON Files, die leicht übernommen, umformatiert und in jeder gewollten Form dargestellt werden können. Dies funktioniert mit Hilfe des REST Zugriffs.
+\subsection{Rest API}
+Bei REST oder RESTful API (Representational State Transfer)  \cite{restapidef}  handelt es sich um einen Softwarearchitekturansatz zum Erstellen skalierbarer Webdienste. Dieser Ansatz legt die Prinzipien für die Organisation der Interaktionen einer Anwendung mit einem Server über das HTTP-Protokoll fest. REST APIs sind stateless. Das heißt, dass Aufrufe unabhängig voneinander ausgeführt werden können. Jeder Aufruf enthält alle Daten, die zum erfolgreichen Abschluss erforderlich sind, unter anderem die Benutzerinformationen zur Authentifizierung. 
+Die gesamten Operationen sind auf 4 reduziert: 
+
+Mit einer GET-Anfrage kann eine Ressource, meist im JSON- oder XML-Format, abgerufen werden. Mit PUT können Datensätze geändert werden, mit POST können diese auch neu erstellt werden und mit DELETE kann man sie entfernen. 
+
+Ein Vorteil von REST APIs ist, dass sie sehr flexibel sind. Da Daten nicht an Ressourcen oder Methoden gebunden sind, kann REST mehrere Arten von Aufrufen verarbeiten und unterschiedliche Datenformate zurückgeben. 
+FatSecret bietet eine REST API an, mit die Entwickler FatSecret Platform-Funktionen in ihre Anwendungen integrieren können. Die REST API kann zum Erstellen von Ernährungs-, Diät- und Gewichtsmanagement-Lösungen auf jeder Plattform verwendet werden, einschließlich Desktop-Client-Anwendungen und Lösungen für mobile Geräte. Zusätzlich sind viele Zugriffsfunktionen, die automatisch Daten sortieren und eingrenzen, auf dem Git Repository verfügbar. 
+
+Der Zugriff erfolgt mit einem Zugriffsschlüssel (Consumer API Key)  und dem dazugehörigen Geheimschlüssel (Consumer Secret), den man ebenso nach der Anmeldung zugeschickt bekommt. Zu beachten ist, dass jeder Aufruf der REST API korrekt signiert sein muss. Weitere Informationen zum Ausgabeformat, Signieren der Abfragen und Methoden, die die API mit den Zugriffen liefert, sind im Kapitel „FatSecret API“ zu finden.

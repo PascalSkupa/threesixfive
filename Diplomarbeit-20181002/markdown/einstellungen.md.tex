@@ -1,0 +1,624 @@
+\hypertarget{was-man-einstellen-kann}{%
+\section{Was man einstellen kann}\label{was-man-einstellen-kann}}
+
+Die Vorlage sollte ohne Anpassungen verwendet werden. Begründete
+Abweichungen sind bitte mit dem Betreuer abzuklären.
+
+Einige \emph{Dinge} kann man bei der Diplomarbeit auch noch anpassen.
+Einiges ist sogar in der .tex-Datei schon vorgesehen -- bitte den Anfang
+des Source-Codes aufmerksam lesen.
+
+\hypertarget{inhaltkapitel}{%
+\subsection{Inhalt/Kapitel}\label{inhaltkapitel}}
+
+Einige Ideen zur Gliederung der Arbeit gibt es unter
+\url{http://www.diplomarbeiten-bbs.at/} \footnote{\url{http://www.diplomarbeiten-bbs.at/erstellung/durchf\%C3\%BChrung/gliederung-der-diplomarbeit-und-formale-vorgaben-0}}
+
+\hypertarget{einseitigzweiseitig}{%
+\subsection{Einseitig/zweiseitig}\label{einseitigzweiseitig}}
+
+Korrekturexemplar immer einseitig drucken. Das fertige Buch ist dann
+beidseitig zu drucken.
+
+Achtung: bei einseitigen Ausdruck der Diplomarbeit sind einige Dinge
+anzupassen (Überschriften, Vorlage für Kapitel, Bundsteg \usw) -- beim
+Korrekturexemplar sind diese Änderungen nicht notwendig, es kommt
+dadurch aber \zB zu leeren Seiten.
+
+\hypertarget{farben}{%
+\subsection{Farben}\label{farben}}
+
+\begin{itemize}
+\tightlist
+\item
+  Deckblatt mit Logo immer in Farbe
+\item
+  Farbausdrucke sind viel teurer -- Notwendigkeit prüfen und mit dem
+  Betreuer abklären.
+\item
+  am aufwändigsten: ein paar Seiten in Farbe
+\item
+  falls Schwarz-Weiß: kein Logo beim laufenden Text
+\end{itemize}
+
+\hypertarget{autor}{%
+\subsection{Autor}\label{autor}}
+
+Bei der Diplomarbeit muss jeder Text einem Autor zuzuordnen sein. Man
+kann das wie in der Vorlage in der Fußzeile machen. Alternativ kann man
+auch eine Übersicht als Anhang eingefügt werden -- bitte mit dem
+Betreuer abklären.
+
+\hypertarget{absuxe4tze}{%
+\subsection{Absätze}\label{absuxe4tze}}
+
+\hypertarget{einzug}{%
+\subsubsection{Einzug}\label{einzug}}
+
+Den Beginn eines neuen Absatzes wird durch einen Abstand zwischen den
+Absätzen gekennzeichnet.
+
+Alternative: durch Einrücken kennzeichnen. Diese Einstellung wird in der
+Vorlage bzw. im Header gemacht:
+
+\begin{lstlisting}[language=TeX]
+%\parindent0pt % auskommentieren, wenn keine Einrueckung der 
+               % ersten Absatzzeile gewuenscht
+%\parskip1.5ex plus0.5ex minus0.5ex % flexibler Absatzabstand
+\end{lstlisting}
+
+Die Option \passthrough{\lstinline!parskip=half!} bei
+\passthrough{\lstinline!documentclass!} ersetzt bereits den Absatzeinzug
+durch einen Absatzabstand.
+
+oder \url{http://ctan.org/pkg/parskip}
+
+\begin{lstlisting}[language=TeX]
+\usepackage[parfill]{parskip}
+\end{lstlisting}
+
+\hypertarget{latex-noch-schuxf6ner}{%
+\subsubsection{Latex -- noch schöner}\label{latex-noch-schuxf6ner}}
+
+\url{http://www.khirevich.com/latex/microtype/}
+
+\hypertarget{aufzuxe4hlungen}{%
+\subsection{Aufzählungen}\label{aufzuxe4hlungen}}
+
+Man kann die Einrückung und vieles mehr anpassen:
+
+\begin{lstlisting}[language=TeX]
+\usepackage{enumitem}
+\setlist[1]{labelindent=\parindent}
+\setlist{align=left}
+\setlist[itemize]{leftmargin=*}
+
+% oder: 
+\setlength\partopsep{0.5ex}
+\end{lstlisting}
+
+\hypertarget{warnungen}{%
+\subsection{Warnungen}\label{warnungen}}
+
+\begin{lstlisting}[language=TeX]
+\sloppy  % etwas laxere Abstandskontrolle (weniger Fehlermeldungen)
+\end{lstlisting}
+
+\hypertarget{listings}{%
+\subsection{Listings}\label{listings}}
+
+Sonderzeichen:
+
+\url{http://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings\#Encoding_issue}
+
+Anpassen:
+
+\url{http://stackoverflow.com/questions/1965702/how-to-mark-line-breaking-of-long-lines}
+
+\url{http://www.bollchen.de/blog/2011/04/good-looking-line-breaks-with-the-listings-package/}
+
+\hypertarget{zitierstil}{%
+\subsection{Zitierstil:}\label{zitierstil}}
+
+Bitte mit dem Betreuer abklären.
+
+\begin{itemize}
+\tightlist
+\item
+  plaindin - mit nummern {[}1{]}
+\end{itemize}
+
+Alternativen:
+
+\begin{itemize}
+\tightlist
+\item
+  alphadin - mit Text+Jahr {[}Hor99{]}
+\end{itemize}
+
+\hypertarget{glossar}{%
+\subsection{Glossar}\label{glossar}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://ctan.org/pkg/glossaries/}
+\item
+  \url{http://texwelt.de/wissen/fragen/10496/glossaries-alle-symbole-nur-verwendete-abkurzungen-anzeigen}
+\item
+  \url{http://en.wikibooks.org/wiki/LaTeX/Glossary} für die
+  verschiedenen Formen
+\end{itemize}
+
+\hypertarget{ausdruck-zu-weit-obenunten}{%
+\subsection{Ausdruck zu weit
+oben/unten}\label{ausdruck-zu-weit-obenunten}}
+
+Man kann das Layout anpassen: Position auf Seite -- bei einigen Druckern
+(HP ?) notwendig.
+
+\begin{lstlisting}[language=TeX]
+\voffset10mm
+\end{lstlisting}
+
+\hypertarget{urls}{%
+\subsection{URLs}\label{urls}}
+
+Man kann/sollte das \passthrough{\lstinline!hyperref!}-Paket anpassen,
+die bunten Links kann man ausschalten.
+
+\begin{lstlisting}[language=TeX]
+\hypersetup{breaklinks=true,
+bookmarks=true,
+pdfauthor={Mein Name},% <------------------- anpassen!
+pdftitle={Die Diplomarbeit},% <------------------- anpassen!
+colorlinks=true,
+citecolor=blue,
+urlcolor=blue,
+linkcolor=magenta,
+pdfborder={0 0 0}}
+
+\urlstyle{same}
+\end{lstlisting}
+
+\hypertarget{pandoc-caption-mit-verweis}{%
+\subsection{Pandoc-Caption mit
+Verweis}\label{pandoc-caption-mit-verweis}}
+
+siehe \url{https://github.com/chiakaivalya/thesis-markdown-pandoc}
+
+This is how you insert figures using markdown. Also how to insert
+citations copied over from your bibliography manager (I specifically
+used Pandoc Citations in Papers).
+
+\begin{lstlisting}
+![Figure from Walczak, 2010[@Walczak:2010uk]. 
+    \label{mitosis} ](figures/mitosis_Walczak.pdf)
+\end{lstlisting}
+
+\hypertarget{seitennummern}{%
+\subsection{Seitennummern}\label{seitennummern}}
+
+\url{http://www.golatex.de/wiki/\%5Cfrontmatter}
+
+\begin{lstlisting}[language=TeX]
+\frontmatter % switches to roman numbering
+\mainmatter
+\backmatter
+\end{lstlisting}
+
+\hypertarget{vorlagen}{%
+\subsection{Vorlagen}\label{vorlagen}}
+
+\hypertarget{tu-wien-informatik}{%
+\subsubsection{TU Wien -- Informatik}\label{tu-wien-informatik}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth.git}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    super Vorlage und Build-Skripts (auch für Windows)
+  \end{itemize}
+\item
+  \url{http://www.informatik.tuwien.ac.at/dekanat/abschluss-master}
+\item
+  \url{http://www.informatik.tuwien.ac.at/fakultaet/informatik-code-of-ethics.pdf}
+\item
+  Alte Vorlage
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \url{http://ieg.ifs.tuwien.ac.at/~aigner/download/tuwien.sty}
+  \item
+    von dort sind die Abkürzungen kopiert
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{andere}{%
+\subsubsection{Andere}\label{andere}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://www.ctan.org/tex-archive/macros/latex/contrib/etdipa?lang=de}
+\item
+  \url{https://github.com/Digital-Media/HagenbergThesis}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    enthält viele Tipps
+  \end{itemize}
+\item
+  \url{https://github.com/philipmichel/vorlage-diplomarbeit-latex/blob/master/diplom.pdf}
+\end{itemize}
+
+\hypertarget{tipps-zur-diplomarbeit-checkliste}{%
+\section{Tipps zur Diplomarbeit --
+Checkliste}\label{tipps-zur-diplomarbeit-checkliste}}
+
+\hypertarget{source}{%
+\subsection{Source}\label{source}}
+
+\begin{itemize}
+\tightlist
+\item
+  mit Java/Python/*-doc
+\item
+  sinnvolle Namen
+\item
+  Codierrichtlinien eingehalten
+
+  \begin{itemize}
+  \tightlist
+  \item
+    definiert?
+  \item
+    welche?
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{buch}{%
+\subsection{Buch}\label{buch}}
+
+\begin{itemize}
+\item
+  einheitliche Formatierung
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Formatvorlage eingehalten
+  \end{itemize}
+\item
+  Layout
+
+  \begin{itemize}
+  \tightlist
+  \item
+    kein halb-leeren Seiten
+  \item
+    wichtig bei Bildern und Listings
+  \end{itemize}
+\item
+  Grammatik + Rechtschreibung
+\item
+  Irgendwie sollte man ein (einheitliches) Bild vom Leser haben:\newline
+  Negativbeispiel:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    einerseits eine Dummy dem man \passthrough{\lstinline!mdir!}
+    erklären muss
+  \item
+    andererseits kann er Python-Pakete installieren
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{umfang}{%
+\subsubsection{Umfang}\label{umfang}}
+
+\begin{itemize}
+\tightlist
+\item
+  ohne Bilder aus dem Web bzw. Füllbilder
+\end{itemize}
+
+\hypertarget{formulierungen}{%
+\subsection{Formulierungen}\label{formulierungen}}
+
+NICHT:
+
+\begin{itemize}
+\tightlist
+\item
+  romanartige Erzählungen
+\item
+  seitenlange Installationsanweisungen statt Link auf Anleitung im Web
+\end{itemize}
+
+\hypertarget{listings-1}{%
+\subsection{Listings}\label{listings-1}}
+
+\begin{itemize}
+\item
+  wenig
+\item
+  ohne Kommentare
+
+  \begin{itemize}
+  \tightlist
+  \item
+    dafür mit Erklärung
+  \item
+    mit Verweis auf File
+  \end{itemize}
+\item
+  UML Diagramme als Ergänzung
+\item
+  Anordung: Floating
+\end{itemize}
+
+\hypertarget{bilder}{%
+\subsection{Bilder}\label{bilder}}
+
+\begin{itemize}
+\tightlist
+\item
+  Floating
+\item
+  Quellenangabe
+\end{itemize}
+
+\hypertarget{versionsverwaltung}{%
+\subsection{Versionsverwaltung}\label{versionsverwaltung}}
+
+\begin{itemize}
+\tightlist
+\item
+  je unabhängigen Teilprojekt
+\item
+  sinnvolle Kommits (Nachrichten)
+\item
+  regelmäßig
+\end{itemize}
+
+\hypertarget{ppm}{%
+\subsection{PPM}\label{ppm}}
+
+\begin{itemize}
+\tightlist
+\item
+  Entscheidung: Wieviel?
+\item
+  NICHT unreflektierte Analysen vom Projektstart im Anhang
+\end{itemize}
+
+\hypertarget{quellen}{%
+\subsection{Quellen}\label{quellen}}
+
+\begin{itemize}
+\tightlist
+\item
+  alle Tools inkl. Versionsnummer
+\item
+  alle Zitate bzw. übernommenen Meinungen
+\item
+  Datenblätter \ua
+\end{itemize}
+
+\hypertarget{aussagen}{%
+\subsubsection{Aussagen}\label{aussagen}}
+
+Alles im Buch sollte man in folgende drei Typen einteilen:
+
+\begin{itemize}
+\tightlist
+\item
+  Stand der Technik -- Quelle notwendig
+\item
+  selbst gemacht -- Verweis wie und wo
+\item
+  Meinung -- als eigene Meinung bzw. Einschätzung kennzeichnen
+\end{itemize}
+
+\hypertarget{skripts}{%
+\section{Skripts}\label{skripts}}
+
+\hypertarget{pandoc-nach-latex}{%
+\subsection{Pandoc nach Latex}\label{pandoc-nach-latex}}
+
+\begin{lstlisting}[language=bash]
+#! /bin/bash
+#set -x
+#set -v
+set -e
+
+PANDOCMODULES=markdown+auto_identifiers
+PANDOCMODULES=${PANDOCMODULES}+definition_lists
+#PANDOCMODULES=${PANDOCMODULES}+compact_definition_lists
+PANDOCMODULES=${PANDOCMODULES}+fenced_code_attributes
+PANDOCMODULES=${PANDOCMODULES}+autolink_bare_uris
+PANDOCMODULES=${PANDOCMODULES}+simple_tables+table_captions
+PANDOCMODULES=${PANDOCMODULES}+inline_notes+footnotes
+
+PANDOCOPT="--listings-S -N -f ${PANDOCMODULES}"
+
+mkdir -p ../kaptex/
+rm -f ../kaptex/*
+
+for f in *.md
+do
+   out=$(basename $f .md).tex
+   echo -n $f " "
+   pandoc ${PANDOCOPT} $f -o ../kaptex/$out
+done
+\end{lstlisting}
+
+\hypertarget{diplomarbeit-bauen}{%
+\subsection{Diplomarbeit bauen}\label{diplomarbeit-bauen}}
+
+Wichtig -- damit alle Seitenummern und Verweise passen:
+
+\begin{itemize}
+\tightlist
+\item
+  erster Latex-Lauf
+\item
+  \passthrough{\lstinline!makeindex!} und
+  \passthrough{\lstinline!bibref!} aufrufen
+\item
+  noch zweimal Latex
+\end{itemize}
+
+\begin{lstlisting}[language=bash]
+cd kapmd
+./create.sh
+cd ..
+
+# mit pdflatex
+pdflatex diplbuch.tex &&
+makeindex -c -q diplbuch.idx &&
+bibtex diplbuch
+pdflatex diplbuch.tex &&
+pdflatex diplbuch.tex
+
+# Alternative
+# latexmk -pdf -silent diplomarbeit.tex
+\end{lstlisting}
+
+\hypertarget{tipps-der-uni-hagenberg}{%
+\section{Tipps der Uni Hagenberg}\label{tipps-der-uni-hagenberg}}
+
+Angepasste Kopie aus \citep{hagenberg}.
+
+\hypertarget{drucken}{%
+\subsection{Drucken}\label{drucken}}
+
+Vor dem Drucken der Arbeit empfiehlt es sich, einige Dinge zu beachten,
+um unnötigen Aufwand (und auch Kosten) zu vermeiden.
+
+\hypertarget{drucker-und-papier}{%
+\subsubsection{Drucker und Papier}\label{drucker-und-papier}}
+
+Die Abschlussarbeit sollte in der Endfassung unbedingt auf einem
+qualitativ hochwertigen Laserdrucker ausgedruckt werden, Ausdrucke mit
+Tintenstrahldruckern sind \emph{nicht} ausreichend. Auch das verwendete
+Papier sollte von guter Qualität (holzfrei) und üblicher Stärke
+(mind.~\(80\; {\mathrm g} / {\mathrm m}^2\)) sein. Falls \emph{farbige}
+Seiten notwendig sind, sollte man diese einzeln\footnote{Tip: Mit
+  \emph{Adobe Acrobat} lassen sich sehr einfach einzelne Seiten des
+  Dokuments für den Farbdruck auswählen und zusammenstellen.} auf einem
+Farb-Laserdrucker ausdrucken und dem Dokument beifügen.
+
+Übrigens sollten \textbf{alle} abzugebenden Exemplare \textbf{gedruckt}
+(und nicht kopiert) werden! Die Kosten für den Druck sind heute nicht
+höher als die für Kopien, der Qualitätsunterschied ist jedoch -- \va~bei
+Bildern und Grafiken -- meist deutlich.
+
+\hypertarget{druckgruxf6uxdfe}{%
+\subsubsection{Druckgröße}\label{druckgruxf6uxdfe}}
+
+Zunächst sollte sichergestellt werden, dass die in der fertigen
+PDF-Datei eingestellte Papiergröße tatsächlich \textbf{A4} ist! Das geht
+\zB~mit \emph{Adobe Acrobat} oder \emph{SumatraPDF} über
+\passthrough{\lstinline!File!} \(\rightarrow\)
+\passthrough{\lstinline!Properties!}, wo die Papiergröße des Dokuments
+angezeigt wird:
+
+\begin{center}
+\textbf{Richtig:} A4 = $8{,}27 \times 11{,}69$ in \bzw\ $21{,}0 \times 29{,}7$ cm.
+\end{center}
+
+Falls das nicht stimmt, ist vermutlich irgendwo im Workflow
+versehentlich \textbf{Letter} als Papierformat eingestellt.
+
+Ein häufiger und leicht zu übersehender Fehler beim Ausdrucken von
+PDF-Dokumenten wird durch die versehentliche Einstellung der Option
+```Fit to page''' im Druckmenü verursacht, wobei die Seiten meist zu
+klein ausgedruckt werden. Überprüfen Sie daher die Größe des Ausdrucks
+anhand der eingestellten Zeilenlänge oder mithilfe einer Messgrafik, wie
+am Ende dieses Dokuments gezeigt. Sicherheitshalber sollte diese
+Messgrafik bis zur Fertigstellung der Arbeit beibehalten und die
+entsprechende Seite erst ganz am Schluss zu entfernt werden. Wenn, wie
+häufig der Fall, einzelne Seiten getrennt in Farbe gedruckt werden, so
+sollten natürlich auch diese genau auf die Einhaltung der Druckgröße
+kontrolliert werden!
+
+\hypertarget{schlussbemerkungen}{%
+\subsection{Schlussbemerkungen}\label{schlussbemerkungen}}
+
+An dieser Stelle sollte eine Zusammenfassung der Abschlussarbeit stehen,
+in der auch auf den Entstehungsprozess, persönliche Erfahrungen,
+Probleme bei der Durchführung, Verbesserungsmöglichkeiten, mögliche
+Erweiterungen \usw~eingegangen werden kann. War das Thema richtig
+gewählt, was wurde konkret erreicht, welche Punkte blieben offen und wie
+könnte von hier aus weitergearbeitet werden?
+
+\hypertarget{lesen-und-lesen-lassen}{%
+\subsubsection{Lesen und lesen lassen}\label{lesen-und-lesen-lassen}}
+
+Wenn die Arbeit fertig ist, sollten Sie diese zunächst selbst nochmals
+vollständig und sorgfältig durchlesen, auch wenn man vielleicht das
+mühsam entstandene Produkt längst nicht mehr sehen möchte. Zusätzlich
+ist sehr zu empfehlen, auch einer weiteren Person diese Arbeit anzutun
+-- man wird erstaunt sein, wie viele Fehler man selbst überlesen hat.
+
+\hypertarget{checkliste}{%
+\subsubsection{Checkliste}\label{checkliste}}
+
+Abschließend noch eine kurze Liste der wichtigsten Punkte, an denen
+erfahrungsgemäß die häufigsten Fehler auftreten.
+
+Diese Punkte bilden auch die Grundlage der routine-mäßigen
+Formbegutachtung in Hagenberg.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Titelseite:} Länge des Titels (Zeilenumbrüche), Name,
+  Studiengang, Datum.
+\item
+  \textbf{Erklärung:} vollständig Unterschrift.
+\item
+  \textbf{Inhaltsverzeichnis:} balancierte Struktur, Tiefe, Länge der
+  Überschriften.
+\item
+  \textbf{Kurzfassung/Abstract:} präzise Zusammenfassung, passende
+  Länge, gleiche Inhalte und Struktur.
+\item
+  \textbf{Überschriften:} Länge, Stil, Aussagekraft.
+\item
+  \textbf{Typographie:} sauberes Schriftbild, keine \emph{manuellen}
+  Abstände zwischen Absätzen oder Einrückungen, keine überlangen Zeilen,
+  Hervorhebungen, Schriftgröße, Platzierung von Fußnoten.
+\item
+  \textbf{Interpunktion:} Binde- und Gedankenstriche richtig gesetzt,
+  Abstände nach Punkten (\va~nach Abkürzungen).
+\item
+  \textbf{Abbildungen:} Qualität der Grafiken und Bilder, Schriftgröße
+  und -typ in Abbildungen, Platzierung von Abbildungen und Tabellen,
+  Captions. Sind \emph{alle} Abbildungen (und Tabellen) im Text
+  referenziert?
+\item
+  \textbf{Gleichungen/Formeln:} mathem.~Elemente auch im Fließtext
+  richtig gesetzt, explizite Gleichungen richtig verwendet, Verwendung
+  von mathem.~Symbolen.
+\item
+  \textbf{Quellenangaben:} Zitate richtig referenziert, Seiten- oder
+  Kapitelangaben.
+\item
+  \textbf{Literaturverzeichnis:} mehrfach zitierte Quellen nur einmal
+  angeführt, Art der Publikation muss in jedem Fall klar sein,
+  konsistente Einträge, Online-Quellen (URLs) sauber angeführt.
+\item
+  \textbf{Sonstiges:} ungültige Querverweise (\textbf{??}), Anhang,
+  Papiergröße der PDF-Datei (A4 = \(8.27 \times 11.69\) Zoll),
+  Druckgröße und -qualität.
+\end{itemize}

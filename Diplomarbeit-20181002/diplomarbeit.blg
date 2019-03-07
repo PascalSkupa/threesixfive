@@ -1,0 +1,66 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: diplomarbeit.aux
+The style file: plaindin.bst
+Database file #1: diplom.bib
+Warning--entry type for "food2fork" isn't style-file defined
+--line 79 of file diplom.bib
+Warning--entry type for "spoonacular" isn't style-file defined
+--line 84 of file diplom.bib
+Warning--entry type for "edamam" isn't style-file defined
+--line 89 of file diplom.bib
+Warning--entry type for "fatsecret" isn't style-file defined
+--line 94 of file diplom.bib
+Warning--entry type for "fatsecretJS" isn't style-file defined
+--line 99 of file diplom.bib
+Warning--entry type for "apidef" isn't style-file defined
+--line 104 of file diplom.bib
+Warning--entry type for "restapidef" isn't style-file defined
+--line 109 of file diplom.bib
+Warning--entry type for "KritikanderMySQLDatenbank" isn't style-file defined
+--line 117 of file diplom.bib
+Warning--entry type for "PostgreSQLAnwendungsfall" isn't style-file defined
+--line 123 of file diplom.bib
+Warning--entry type for "NoSQL" isn't style-file defined
+--line 129 of file diplom.bib
+Warning--entry type for "MySQLigegenPDO" isn't style-file defined
+--line 135 of file diplom.bib
+Warning--entry type for "SQLiteDefinition" isn't style-file defined
+--line 141 of file diplom.bib
+Warning--entry type for "MariaDBDefinition" isn't style-file defined
+--line 147 of file diplom.bib
+Warning--entry type for "DBRanking" isn't style-file defined
+--line 153 of file diplom.bib
+Warning--entry type for "SQLiteLimitierungen" isn't style-file defined
+--line 159 of file diplom.bib
+Warning--entry type for "PostgreSQLVerwaltungstools" isn't style-file defined
+--line 165 of file diplom.bib
+Warning--entry type for "MaterialDesign" isn't style-file defined
+--line 172 of file diplom.bib
+Warning--entry type for "MaterialDesignColors" isn't style-file defined
+--line 178 of file diplom.bib
+Warning--entry type for "Logo" isn't style-file defined
+--line 184 of file diplom.bib
+I was expecting a `,' or a `}'---line 190 of file diplom.bib
+ : @online{Angular 
+ :                 Frontend,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "AngularFrontend"
+Warning--to sort, need author or key in MaterialDesign
+Warning--to sort, need author or key in MaterialDesignColors
+Warning--to sort, need author or key in Logo
+Warning--to sort, need author or key in apidef
+Warning--to sort, need author or key in food2fork
+Warning--to sort, need author or key in spoonacular
+Warning--to sort, need author or key in edamam
+Warning--to sort, need author or key in fatsecret
+Warning--to sort, need author or key in fatsecretJS
+Warning--to sort, need author or key in restapidef
+Warning--to sort, need author or key in MySQLigegenPDO
+Warning--to sort, need author or key in KritikanderMySQLDatenbank
+Warning--to sort, need author or key in NoSQL
+Warning--to sort, need author or key in MariaDBDefinition
+Warning--to sort, need author or key in PostgreSQLAnwendungsfall
+Warning--to sort, need author or key in SQLiteDefinition
+Warning--to sort, need author or key in SQLiteLimitierungen
+Warning--to sort, need author or key in DBRanking
+Warning--to sort, need author or key in PostgreSQLVerwaltungstools
+(There was 1 error message)
