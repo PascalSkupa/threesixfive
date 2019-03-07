@@ -1,135 +1,203 @@
 <!--<form [formGroup]="foodForm" (ngSubmit)="onSubmit()">
-
   <div class="form-group">
     <button [disabled]="loading" class="btn btn-primary" (click)="onSubmit()">Submit</button>
     <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
   </div>
 </form>-->
-<h2 style="margin-left: 10%">Enter your personal food preferences</h2>
-<div class="ui-g form-grid">
+<form [formGroup]="foodForm" (ngSubmit)="onSubmit()">
+  <h2 style="margin-left: 10%">Enter your personal preferences</h2>
+  <div class="ui-g form-grid">
 
-  <div class="ui-g-12 ui-md-6">
-    <h4 class="first">Persons: {{val1}}</h4>
-    <p-slider [(ngModel)]="val1" [style]="{'width':'14em'}" [min]="1" [max]="10"></p-slider>
+    <div class="ui-g-12 ui-md-6">
+      <h4 class="first">For how many Persons are you planning to use it?<br>Persons: {{val1}}</h4>
+      <p-slider [(ngModel)]="val1" [ngModelOptions]="{standalone: true}"
+                [style]="{'width':'14em','margin-bottom':'5em'}" [min]="1"
+                [max]="10"></p-slider>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <h4>Which Diet are you planning on following?</h4>
+      <p-selectButton [options]="diets" [(ngModel)]="selectedDiets" [ngModelOptions]="{standalone: true}"
+                      multiple="multiple"></p-selectButton>
+    </div>
+
   </div>
+  <hr style="max-width: 80%">
 
-  <div class="ui-g-12 ui-md-6">
-    <h4>Choose on which Days you are cooking at Home</h4>
-    <div class="ui-g" style="width:250px;margin-bottom:10px;flex-wrap: nowrap">
-      <div class="ui-g-12" style="margin:0 0.5em 0 0">
-        <p-checkbox name="days" value="Montag" label="Mo" [(ngModel)]="selectedDays" inputId="montag"></p-checkbox>
-        <p-toggleButton [(ngModel)]="checked11" onLabel="" offLabel="" onIcon="pi pi-check"
-                        offIcon="pi pi-times" [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked21" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked31" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked41" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-      </div>
-      <div class="ui-g-12" style="margin:0 0.5em 0 0">
-        <p-checkbox name="days" value="Dienstag" label="Di" [(ngModel)]="selectedDays"
-                    inputId="dienstag"></p-checkbox>
-        <p-toggleButton [(ngModel)]="checked12" onLabel="" offLabel="" onIcon="pi pi-check"
-                        offIcon="pi pi-times" [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked22" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked32" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked42" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-      </div>
-      <div class="ui-g-12" style="margin:0 0.5em 0 0">
-        <p-checkbox name="days" value="Mittwoch" label="Mi" [(ngModel)]="selectedDays"
-                    inputId="mittwoch"></p-checkbox>
-        <p-toggleButton [(ngModel)]="checked13" onLabel="" offLabel="" onIcon="pi pi-check"
-                        offIcon="pi pi-times" [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked23" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked33" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked43" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-      </div>
-      <div class="ui-g-12" style="margin:0 0.5em 0 0">
-        <p-checkbox name="days" value="Donnerstag" label="Do" [(ngModel)]="selectedDays"
-                    inputId="donnerstag"></p-checkbox>
-        <p-toggleButton [(ngModel)]="checked14" onLabel="" offLabel="" onIcon="pi pi-check"
-                        offIcon="pi pi-times" [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked24" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked34" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked44" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-      </div>
-      <div class="ui-g-12" style="margin:0 0.5em 0 0">
-        <p-checkbox name="days" value="Freitag" label="Fr" [(ngModel)]="selectedDays" inputId="freitag"></p-checkbox>
-        <p-toggleButton [(ngModel)]="checked15" onLabel="" offLabel="" onIcon="pi pi-check"
-                        offIcon="pi pi-times" [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked25" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked35" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked45" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-      </div>
-      <div class="ui-g-12" style="margin:0 0.5em 0 0">
-        <p-checkbox name="days" value="Samstag" label="Sa" [(ngModel)]="selectedDays" inputId="samstag"></p-checkbox>
-        <p-toggleButton [(ngModel)]="checked16" onLabel="" offLabel="" onIcon="pi pi-check"
-                        offIcon="pi pi-times" [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked26" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked36" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked46" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-      </div>
-      <div class="ui-g-12" style="margin:0 0.5em 0 0">
-        <p-checkbox name="days" value="Sonntag" label="So" [(ngModel)]="selectedDays" inputId="sonntag"></p-checkbox>
-        <p-toggleButton [(ngModel)]="checked17" onLabel="" offLabel="" onIcon="pi pi-check"
-                        offIcon="pi pi-times" [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked27" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked37" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
-        <p-toggleButton [(ngModel)]="checked47" onLabel="" offLabel="" onIcon="pi pi-check" offIcon="pi pi-times"
-                        [style]="{'width':'30px' , 'margin-top':'20px'}"></p-toggleButton>
+  <div class="ui-g form-grid">
+    <div class="ui-g-12">
+      <h4>Choose on which Days you are cooking at Home</h4>
+      <div class="ui-g" style="flex-wrap: nowrap">
+        <div class="" style="margin:0 0 0 0">
+          <p-checkbox name="days" value="Montag" label="Mo" [(ngModel)]="selectedDays"
+                      [ngModelOptions]="{standalone: true}" inputId="montag"></p-checkbox>
+          <p-toggleButton [(ngModel)]="checked11" [ngModelOptions]="{standalone: true}" onLabel="Breakfast"
+                          offLabel="Breakfast"
+                          onIcon="pi pi-check"
+                          offIcon="pi pi-times" [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked21" [ngModelOptions]="{standalone: true}" onLabel="Lunch" offLabel="Lunch"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked31" [ngModelOptions]="{standalone: true}" onLabel="Dinner"
+                          offLabel="Dinner"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked41" [ngModelOptions]="{standalone: true}" onLabel="Snack" offLabel="Snack"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+        </div>
+        <div class="" style="margin:0 0 0 0">
+          <p-checkbox name="days" value="Dienstag" label="Tu" [(ngModel)]="selectedDays"
+                      [ngModelOptions]="{standalone: true}"
+                      inputId="dienstag"></p-checkbox>
+          <p-toggleButton [(ngModel)]="checked12" [ngModelOptions]="{standalone: true}" onLabel="Breakfast"
+                          offLabel="Breakfast"
+                          onIcon="pi pi-check"
+                          offIcon="pi pi-times" [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked22" [ngModelOptions]="{standalone: true}" onLabel="Lunch" offLabel="Lunch"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked32" [ngModelOptions]="{standalone: true}" onLabel="Dinner"
+                          offLabel="Dinner"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked42" [ngModelOptions]="{standalone: true}" onLabel="Snack" offLabel="Snack"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+        </div>
+        <div class="" style="margin:0 0 0 0">
+          <p-checkbox name="days" value="Mittwoch" label="We" [(ngModel)]="selectedDays"
+                      [ngModelOptions]="{standalone: true}"
+                      inputId="mittwoch"></p-checkbox>
+          <p-toggleButton [(ngModel)]="checked13" [ngModelOptions]="{standalone: true}" onLabel="Breakfast"
+                          offLabel="Breakfast"
+                          onIcon="pi pi-check"
+                          offIcon="pi pi-times" [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked23" [ngModelOptions]="{standalone: true}" onLabel="Lunch" offLabel="Lunch"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked33" [ngModelOptions]="{standalone: true}" onLabel="Dinner"
+                          offLabel="Dinner"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked43" [ngModelOptions]="{standalone: true}" onLabel="Snack" offLabel="Snack"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+        </div>
+        <div class="" style="margin:0 0 0 0">
+          <p-checkbox name="days" value="Donnerstag" label="Th" [(ngModel)]="selectedDays"
+                      [ngModelOptions]="{standalone: true}"
+                      inputId="donnerstag"></p-checkbox>
+          <p-toggleButton [(ngModel)]="checked14" [ngModelOptions]="{standalone: true}" onLabel="Breakfast"
+                          offLabel="Breakfast"
+                          onIcon="pi pi-check"
+                          offIcon="pi pi-times" [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked24" [ngModelOptions]="{standalone: true}" onLabel="Lunch" offLabel="Lunch"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked34" [ngModelOptions]="{standalone: true}" onLabel="Dinner"
+                          offLabel="Dinner"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked44" [ngModelOptions]="{standalone: true}" onLabel="Snack" offLabel="Snack"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+        </div>
+        <div class="" style="margin:0 0 0 0">
+          <p-checkbox name="days" value="Freitag" label="Fr" [(ngModel)]="selectedDays"
+                      [ngModelOptions]="{standalone: true}" inputId="freitag"></p-checkbox>
+          <p-toggleButton [(ngModel)]="checked15" [ngModelOptions]="{standalone: true}" onLabel="Breakfast"
+                          offLabel="Breakfast"
+                          onIcon="pi pi-check"
+                          offIcon="pi pi-times" [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked25" [ngModelOptions]="{standalone: true}" onLabel="Lunch" offLabel="Lunch"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked35" [ngModelOptions]="{standalone: true}" onLabel="Dinner"
+                          offLabel="Dinner"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked45" [ngModelOptions]="{standalone: true}" onLabel="Snack" offLabel="Snack"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+        </div>
+        <div class="" style="margin:0 0 0 0">
+          <p-checkbox name="days" value="Samstag" label="Sa" [(ngModel)]="selectedDays"
+                      [ngModelOptions]="{standalone: true}" inputId="samstag"></p-checkbox>
+          <p-toggleButton [(ngModel)]="checked16" [ngModelOptions]="{standalone: true}" onLabel="Breakfast"
+                          offLabel="Breakfast"
+                          onIcon="pi pi-check"
+                          offIcon="pi pi-times" [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked26" [ngModelOptions]="{standalone: true}" onLabel="Lunch" offLabel="Lunch"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked36" [ngModelOptions]="{standalone: true}" onLabel="Dinner"
+                          offLabel="Dinner"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked46" [ngModelOptions]="{standalone: true}" onLabel="Snack" offLabel="Snack"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+        </div>
+        <div class="" style="margin:0 0 0 0">
+          <p-checkbox name="days" value="Sonntag" label="Su" [(ngModel)]="selectedDays"
+                      [ngModelOptions]="{standalone: true}" inputId="sonntag"></p-checkbox>
+          <p-toggleButton [(ngModel)]="checked17" [ngModelOptions]="{standalone: true}" onLabel="Breakfast"
+                          offLabel="Breakfast"
+                          onIcon="pi pi-check"
+                          offIcon="pi pi-times" [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked27" [ngModelOptions]="{standalone: true}" onLabel="Lunch" offLabel="Lunch"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked37" [ngModelOptions]="{standalone: true}" onLabel="Dinner"
+                          offLabel="Dinner"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+          <p-toggleButton [(ngModel)]="checked47" [ngModelOptions]="{standalone: true}" onLabel="Snack" offLabel="Snack"
+                          onIcon="pi pi-check" offIcon="pi pi-times"
+                          [style]="{'width':'104px' , 'margin-top':'20px'}"></p-toggleButton>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<hr style="max-width: 80%">
 
+  <hr style="max-width: 80%">
 
-<div class="ui-g form-grid">
-  <div class="ui-g-12 ui-md-6">
-    <h4>Meals</h4>
-    <p-selectButton [options]="meals" [(ngModel)]="selectedMeals" multiple="multiple"></p-selectButton>
+  <div class="ui-g form-grid">
+    <div class="ui-g-12"><h4>Allergies</h4>
+      <p-selectButton [options]="allergie" [(ngModel)]="selectedAllergie" [ngModelOptions]="{standalone: true}"
+                      optionLabel="name"
+                      multiple="multiple">
+
+        <ng-template let-item>
+          <div title="{{item.value.name}}" style="">
+            <img style="" src="assets/icon/Allergens/{{item.value.allergen}}"
+                 height="60px"/>
+            <span>{{item.name}}</span>
+          </div>
+        </ng-template>
+      </p-selectButton>
+    </div>
+
   </div>
-  <div class="ui-g-12 ui-md-6"><h4>Diets</h4>
-    <p-selectButton [options]="diets" [(ngModel)]="selectedDiets" multiple="multiple"></p-selectButton>
+
+  <hr style="max-width: 80%">
+
+  <div class="ui-g form-grid">
+    <div class="ui-g-12"><h4>No-Go´s</h4>
+      <p-selectButton [options]="nogo" [(ngModel)]="selectedNogo" [ngModelOptions]="{standalone: true}"
+                      multiple="multiple">
+        <ng-template let-item>
+          <div style="">
+            <img style="" src="assets/icon/Allergens/{{item.value.nogo}}"
+                 height="60px"/>
+            <span>{{item.name}}</span>
+          </div>
+        </ng-template>
+      </p-selectButton>
+    </div>
   </div>
-</div>
-<hr style="max-width: 80%">
 
-
-<div class="ui-g form-grid">
-  <div class="ui-g-12"><h4>Allergies</h4>
-    <p-selectButton [options]="allergie" [(ngModel)]="selectedAllergie" multiple="multiple"></p-selectButton>
+  <div class="form-group ui-g form-grid">
+    <button pButton label="Generate" type="submit" icon="pi pi-check" style="margin-right: .45em"></button>
   </div>
-
-</div>
-
-<hr style="max-width: 80%">
-
-<div class="ui-g form-grid">
-  <div class="ui-g-12"><h4>No-Go´s</h4>
-    <p-selectButton [options]="nogo" [(ngModel)]="selectedNogo" multiple="multiple"></p-selectButton>
-  </div>
-</div>
-
-
-
-
-
+</form>

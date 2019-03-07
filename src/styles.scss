@@ -39,6 +39,8 @@ body .ui-button {
   font-size: 14px;
   transition: background-color 0.2s, box-shadow 0.2s;
 }
+
+
 body .ui-button:hover {
   margin: 0;
   margin: 0;
@@ -91,9 +93,37 @@ body a:hover {
 }
 
 body .ui-chkbox-label {
-  margin: 0 0 0 0em;
+}
+
+body .ui-chkbox{
+  margin-right: 0.5em;
 }
 
 .toggleButton{
   margin: 3px 0 0 0;
+}
+body .ui-togglebutton .ui-button-icon-left {
+  color: white;
+}
+
+p-togglebutton .ui-button{
+  background-color: #61b9bb;
+}
+p-togglebutton .ui-button:hover{
+  background-color: #005b5e;
+}
+p-togglebutton .ui-button:enabled:hover{
+  background-color: #005b5e;
+}
+
+body .ui-togglebutton.ui-state-active:hover {
+  background-color: #067B7D;
+  border-color: #067B7D;
+  color: #ffffff;
+}
+
+body .ui-togglebutton.ui-state-active {
+  background-color: #005b5e;
+  border-color: #005b5e;
+  color: #ffffff;
 }

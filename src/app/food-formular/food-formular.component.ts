@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {SelectItem} from 'primeng/api';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-food-formular',
@@ -10,13 +11,17 @@ import {SelectItem} from 'primeng/api';
 })
 export class FoodFormularComponent implements OnInit {
 
+  foodForm: FormGroup;
+
+  submitted: boolean;
+
   meals: SelectItem[];
 
   diets: SelectItem[];
 
-  allergie: SelectItem[];
+  allergie: ({ label: string; value: string; name: string; allergen: string })[];
 
-  nogo: SelectItem[];
+  nogo: ({ label: string; name: string; nogo: string })[];
 
   selectedMeals: string;
   selectedDiets: string;
@@ -25,7 +30,9 @@ export class FoodFormularComponent implements OnInit {
 
   selectedDays: string[] = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+  ) {
 
     this.meals = [
       {label: 'Breakfast', value: 'Breakfast'},
@@ -43,40 +50,40 @@ export class FoodFormularComponent implements OnInit {
     ];
 
     this.allergie = [
-      {label: 'Celery', value: 'Celery', icon: ''},
-      {label: 'Crustaceans', value: 'Crustaceans', icon: ''},
-      {label: 'Egg', value: 'Egg', icon: ''},
-      {label: 'Fish', value: 'Fish', icon: ''},
-      {label: 'Gluten', value: 'Gluten', icon: ''},
-      {label: 'Lactose', value: 'Lactose', icon: ''},
-      {label: 'Lupines', value: 'Lupines', icon: ''},
-      {label: 'Molluscs', value: 'Molluscs', icon: ''},
-      {label: 'Mustard', value: 'Mustard', icon: ''},
-      {label: 'Nuts', value: 'Nuts', icon: ''},
-      {label: 'Peanuts', value: 'Peanuts', icon: ''},
-      {label: 'Sesame', value: 'Sesame', icon: ''},
-      {label: 'Soy', value: 'Soy', icon: ''},
-      {label: 'Sulphites', value: 'Sulphites', icon: ''},
+      {label: 'Celery', value: 'Celery', name: 'Celery', allergen: 'celery.svg'},
+      {label: 'Crustaceans', value: 'Crustaceans', name: 'Crustaceans', allergen: 'crustaceans.svg'},
+      {label: 'Egg', value: 'Egg', name: 'Egg', allergen: 'egg.svg'},
+      {label: 'Fish', value: 'Fish', name: 'Fish', allergen: 'fish.svg'},
+      {label: 'Gluten', value: 'Gluten', name: 'Gluten', allergen: 'gluten.svg'},
+      {label: 'Lactose', value: 'Lactose', name: 'Lactose', allergen: 'lactose.svg'},
+      {label: 'Lupines', value: 'Lupines', name: 'Lupines', allergen: 'lupines.svg'},
+      {label: 'Molluscs', value: 'Molluscs', name: 'Molluscs', allergen: 'molluscs.svg'},
+      {label: 'Mustard', value: 'Mustard', name: 'Mustard', allergen: 'mustard.svg'},
+      {label: 'Nuts', value: 'Nuts', name: 'Nuts', allergen: 'nuts.svg'},
+      {label: 'Peanuts', value: 'Peanuts', name: 'Peanuts', allergen: 'peanuts.svg'},
+      {label: 'Sesame', value: 'Sesame', name: 'Sesame', allergen: 'sesame.svg'},
+      {label: 'Soy', value: 'Soy', name: 'Soy', allergen: 'soy.svg'},
+      {label: 'Sulphites', value: 'Sulphites', name: 'Sulphites', allergen: 'sulphites.svg'}
     ];
 
     this.nogo = [
-      {label: 'Beef', value: 'Beef', icon: ''},
-      {label: 'Broccoli', value: 'Broccoli', icon: ''},
-      {label: 'Cabbage', value: 'Cabbage', icon: ''},
-      {label: 'Fish', value: 'Fish', icon: ''},
-      {label: 'Lamb', value: 'Lamb', icon: ''},
-      {label: 'Licorice', value: 'Licorice', icon: ''},
-      {label: 'Mushrooms', value: 'Mushrooms', icon: ''},
-      {label: 'Nuts', value: 'Nuts', icon: ''},
-      {label: 'Pork', value: 'Pork', icon: ''},
-      {label: 'Raisin', value: 'Raisin', icon: ''},
-      {label: 'Seafood', value: 'Seafood', icon: ''},
-      {label: 'Soy Milk', value: 'Soy Milk', icon: ''},
-      {label: 'Soy Nuts', value: 'Soy Nuts', icon: ''},
-      {label: 'Soy Sauce', value: 'Soy Sauce', icon: ''},
-      {label: 'Soy Yogurt', value: 'Soy Yogurt', icon: ''},
-      {label: 'Tofu', value: 'Tofu', icon: ''},
-      {label: 'Tomatoes', value: 'Tomatoes', icon: ''}
+      {label: 'Beef', name: 'Beef', nogo: 'beef.svg'},
+      {label: 'Broccoli', name: 'Broccoli', nogo: 'broccoli.svg'},
+      {label: 'Cabbage', name: 'Cabbage', nogo: 'cabbage.svg'},
+      {label: 'Fish', name: 'Fish', nogo: 'fish.svg'},
+      {label: 'Lamb', name: 'Lamb', nogo: 'lamb.svg'},
+      {label: 'Licorice', name: 'Licorice', nogo: 'licorice.svg'},
+      {label: 'Mushrooms', name: 'Mushrooms', nogo: 'mushrooms.svg'},
+      {label: 'Nuts', name: 'Nuts', nogo: 'nuts.svg'},
+      {label: 'Pork', name: 'Pork', nogo: 'pork.svg'},
+      {label: 'Raisin', name: 'Raisin', nogo: 'raisin.svg'},
+      {label: 'Seafood', name: 'Seafood', nogo: 'seafood.svg'},
+      {label: 'Soy Milk', name: 'Soy Milk', nogo: 'soymilk.svg'},
+      {label: 'Soy Nuts', name: 'Soy Nuts', nogo: 'soynuts.svg'},
+      {label: 'Soy Sauce', name: 'Soy Sauce', nogo: 'soysauce.svg'},
+      {label: 'Soy Yogurt', name: 'Soy Yogurt', nogo: 'soyyogurt.svg'},
+      {label: 'Tofu', name: 'Tofu', nogo: 'tofu.svg'},
+      {label: 'Tomatoes', name: 'Tomatoes', nogo: 'tomatoes.svg'}
     ];
   }
 
@@ -86,6 +93,9 @@ export class FoodFormularComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.foodForm = new FormGroup(
+      {persons: new FormControl()
+    });
   }
 
   onSubmit() {
