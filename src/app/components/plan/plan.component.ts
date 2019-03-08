@@ -30,7 +30,6 @@ export class PlanComponent implements OnInit {
   actualDate = new Date();
   dateValue;
   week;
-
   days =
     {
       'Monday': 0,
@@ -41,6 +40,8 @@ export class PlanComponent implements OnInit {
       'Saturday': 5,
       'Sunday': 6
     };
+
+
 
 
   constructor(private service: PlanService) {
@@ -59,6 +60,16 @@ export class PlanComponent implements OnInit {
       clear: 'Clear',
       dateFormat: 'dd/mm/yy'
     };
+    const b = moment().format('dddd');
+    const a = this.days[b];
+    console.log(b + a + '');
+    const monday = moment().subtract(a, 'days').format('MMM Do YY');
+    const woche = [];
+    for (let i = 0; i < 7; i++) {
+      woche.push(moment().add(i - a, 'days'));
+    }
+    this.week = woche;
+    console.log(this.week);
   }
 
   calenderIsClicked() {
@@ -98,5 +109,12 @@ export class PlanComponent implements OnInit {
     }
     console.log(woche);
     this.week = woche;
+  }
+  showDate(date) {
+    this.service.dayIsClicked(date);
+    this.clickedDate = this.service.clickedDate;
+    this.service.viewDay();
+    this.key = this.service.actualView;
+    console.log('kjk');
   }
 }

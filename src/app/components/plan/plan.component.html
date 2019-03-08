@@ -7,9 +7,28 @@
   <div *ngSwitchCase="'monthComponent'" [@enterTrigger]="'fadeIn'">
     <p-calendar class="calender" dateFormat="dd.mm.yy" [(ngModel)]="dateValue" [inline]="true" (onSelect)="calenderIsClicked()" [touchUI]="true" [locale]="en"></p-calendar>
   </div>
-  <app-day-view *ngSwitchCase="'dayComponent'" [Date]="clickedDate"></app-day-view>
-  <app-week-view *ngSwitchCase="'weekComponent'">
-  </app-week-view>
+  <div *ngSwitchCase="'weekComponent'">
+
+    <div class = "week">
+      <span (click)="showDate(week[0])">{{week[0]}}</span>
+      <span (click)="showDate(week[1])">{{week[1]}}</span>
+      <span (click)="showDate(week[2])">{{week[2]}}</span>
+      <span (click)="showDate(week[3])">{{week[3]}}</span>
+      <span (click)="showDate(week[4])">{{week[4]}}</span>
+      <span (click)="showDate(week[5])">{{week[5]}}</span>
+      <span (click)="showDate(week[6])">{{week[6]}}</span>
+    </div>
+
+
+
+
+  </div>
+
+
+
+
+  <app-day-view [Date]="clickedDate" *ngSwitchCase="'dayComponent'">
+  </app-day-view>
 </div>
 
 

@@ -47,7 +47,6 @@ import { RegisterComponent } from './login/register';
 import { MainApplicationComponent } from './components/main-application/main-application.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { FoodFormularComponent } from './food-formular/food-formular.component';
-import { WeekViewComponent } from './components/plan/week-view/week-view.component';
 
 
 @NgModule({
@@ -67,8 +66,7 @@ import { WeekViewComponent } from './components/plan/week-view/week-view.compone
     RegisterComponent,
     MainApplicationComponent,
     TopbarComponent,
-    FoodFormularComponent,
-    WeekViewComponent
+    FoodFormularComponent
   ],
   imports: [
     CommonModule,
