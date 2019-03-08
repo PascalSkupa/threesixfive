@@ -1,4 +1,13 @@
 .week{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-between;
+}
+
+
+.day{
+  width: 250px;
+  text-align: center;
+
 }

@@ -15,5 +15,7 @@ export class DayViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.date = this.Date.toString();
+    this.date = this.date.substring(0, 16);
   }
 }

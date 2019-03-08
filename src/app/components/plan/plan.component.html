@@ -1,16 +1,16 @@
 <button (click)="viewMonth()" *ngIf="key != 'monthComponent'">viewMonth</button>
-<button (click)="viewWeek() " *ngIf="key != 'weekComponent'" >viewWeek</button>
+<button (click)="viewWeek() " *ngIf="key != 'weekComponent'">viewWeek</button>
 
 <div class="plan-container" [ngSwitch]="key">
 
 
   <div *ngSwitchCase="'monthComponent'" [@enterTrigger]="'fadeIn'">
-    <p-calendar class="calender" dateFormat="dd.mm.yy" [(ngModel)]="dateValue" [inline]="true" (onSelect)="calenderIsClicked()" [touchUI]="true" [locale]="en"></p-calendar>
+    <p-calendar class="calender" dateFormat="dd.mm.yy" [(ngModel)]="dateValue" [inline]="true"
+                (onSelect)="calenderIsClicked()" [touchUI]="true" [locale]="en"></p-calendar>
   </div>
-  <div *ngSwitchCase="'weekComponent'">
+  <div *ngSwitchCase="'weekComponent'" style="display: flex; justify-content: center">
 
-    <div class = "week">
-      <span (click)="showDate(week[0])">{{week[0]}}</span>
+      <!--<span (click)="showDate(week[0])">{{week[0]}}</span>
       <span (click)="showDate(week[1])">{{week[1]}}</span>
       <span (click)="showDate(week[2])">{{week[2]}}</span>
       <span (click)="showDate(week[3])">{{week[3]}}</span>
@@ -18,17 +18,61 @@
       <span (click)="showDate(week[5])">{{week[5]}}</span>
       <span (click)="showDate(week[6])">{{week[6]}}</span>
     </div>
-
-
-
+-->
+<div class="week">
+  <p-card class="day">
+    Monday
+    <hr>
+    <p-card>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+    </p-card>
+  </p-card>
+  <p-card class="day">
+    Tuesday
+    <hr>
+    <p-card>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+    </p-card>
+  </p-card>
+  <p-card class="day">
+    Wednesday
+    <hr>
+    <p-card>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+    </p-card>
+  </p-card>
+  <p-card class="day">
+    Thursday
+    <hr>
+    <p-card>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+    </p-card>
+  </p-card>
+  <p-card class="day">
+    Friday
+    <hr>
+    <p-card>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+    </p-card>
+  </p-card>
+  <p-card class="day">
+    Saturday
+    <hr>
+    <p-card>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+    </p-card>
+  </p-card>
+  <p-card class="day">
+    Sunnday
+    <hr>
+    <p-card>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+    </p-card>
+  </p-card>
+</div>
 
   </div>
 
 
-
-
   <app-day-view [Date]="clickedDate" *ngSwitchCase="'dayComponent'">
   </app-day-view>
-</div>
-
-

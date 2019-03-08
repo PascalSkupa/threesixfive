@@ -3,3 +3,17 @@
   border: 2px solid lightgrey;
   padding: 20px;
 }
+
+.day{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recipies{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}

@@ -7,11 +7,8 @@ import {Recipe} from '../../modals/recipe';
   styleUrls: ['./recipe-view.component.scss']
 })
 export class RecipeViewComponent implements OnInit {
-  @Input() recipe: Recipe;
-  @Input() name: string;
-  @Input() description: string;
+  @Input() title;
 
-  panelOpenState = false;
 
   constructor() { }
 
