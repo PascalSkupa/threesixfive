@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import {PlanService} from '../../services/plan/plan.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import * as moment from 'moment';
 
 
 @Component({
@@ -26,8 +27,21 @@ export class PlanComponent implements OnInit {
   en: any;
   clickedDate;
   key = this.service.actualView;
-  private actualDate = new Date();
+  actualDate = new Date();
   dateValue;
+  week;
+
+  days =
+    {
+      'Monday': 0,
+      'Tuesday': 1,
+      'Wednesday': 2,
+      'Thursday': 3,
+      'Friday': 4,
+      'Saturday': 5,
+      'Sunday': 6
+    };
+
 
   constructor(private service: PlanService) {
   }
@@ -69,5 +83,20 @@ export class PlanComponent implements OnInit {
   viewWeek() {
     this.service.viewWeek();
     this.key = this.service.actualView;
+    this.getWeek();
+  }
+
+  getWeek() {
+    const b = moment().format('dddd');
+    const a = this.days[b];
+    console.log(b + a + '');
+    const monday = moment().subtract(a, 'days').format('MMM Do YY');
+    console.log(monday);
+    const woche = [];
+    for (let i = 0; i < 7; i++) {
+      woche.push(moment().add(i - a, 'days'));
+    }
+    console.log(woche);
+    this.week = woche;
   }
 }
