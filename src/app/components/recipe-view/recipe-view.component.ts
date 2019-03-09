@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Recipe} from '../../modals/recipe';
+import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
 
 @Component({
   selector: 'app-recipe-view',
@@ -7,12 +6,15 @@ import {Recipe} from '../../modals/recipe';
   styleUrls: ['./recipe-view.component.scss']
 })
 export class RecipeViewComponent implements OnInit {
-  @Input() title;
+  @Input() title: string;
+  @Input() expandedView: boolean;
 
-
-  constructor() { }
+  constructor(viewContainerRef: ViewContainerRef) { }
 
   ngOnInit() {
+  }
+  cancel() {
+
   }
 
 }

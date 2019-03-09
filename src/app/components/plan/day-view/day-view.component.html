@@ -6,12 +6,28 @@
   <br><br>
   <div class="recipies">
 
-    <app-recipe-view style="width: 300px" [title]="'Breakfast'"></app-recipe-view>
-    <app-recipe-view style="width: 300px" [title]="'Lunch'"></app-recipe-view>
-    <app-recipe-view style="width: 300px" [title]="'Dinner'"></app-recipe-view>
+    <app-recipe-view style="width: 300px" [expandedView]="false" [title]="'Breakfast'" (click)="clickOnRecipie()"></app-recipe-view>
+    <app-recipe-view style="width: 300px" [expandedView]="false" [title]="'Lunch'" (click)="clickOnRecipie()"></app-recipe-view>
+    <app-recipe-view style="width: 300px" [expandedView]="false" [title]="'Dinner'" (click)="clickOnRecipie()"></app-recipe-view>
+
+
 
   </div>
 
+
+  <div class="recipie-view" *ngIf="recipieView">
+
+    <br>
+
+    <app-recipe-view  [expandedView]="true" styleClass="ui-card-shadow">
+
+
+    </app-recipe-view>
+    <br>
+    <button pButton type="button" label="Cancel" icon="pi pi-times" class="ui-button-secondary" (click)="cancel()"></button>
+
+
+  </div>
 </div>
 
 
