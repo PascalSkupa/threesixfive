@@ -47,6 +47,7 @@ import { RegisterComponent } from './login/register';
 import { MainApplicationComponent } from './components/main-application/main-application.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { FoodFormularComponent } from './food-formular/food-formular.component';
+import {TabViewModule} from 'primeng/tabview';
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { FoodFormularComponent } from './food-formular/food-formular.component';
     CheckboxModule,
     MessageModule,
     MessagesModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    TabViewModule
   ],
   providers: [GroceryListService,
     // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

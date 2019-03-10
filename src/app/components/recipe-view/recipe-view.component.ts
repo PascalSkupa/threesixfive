@@ -7,7 +7,7 @@ import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
 })
 export class RecipeViewComponent implements OnInit {
   @Input() title: string;
-  @Input() expandedView: boolean;
+  @Input() view: string;
 
   constructor(viewContainerRef: ViewContainerRef) { }
 

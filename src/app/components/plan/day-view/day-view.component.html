@@ -6,9 +6,9 @@
   <br><br>
   <div class="recipies">
 
-    <app-recipe-view style="width: 300px" [expandedView]="false" [title]="'Breakfast'" (click)="clickOnRecipie()"></app-recipe-view>
-    <app-recipe-view style="width: 300px" [expandedView]="false" [title]="'Lunch'" (click)="clickOnRecipie()"></app-recipe-view>
-    <app-recipe-view style="width: 300px" [expandedView]="false" [title]="'Dinner'" (click)="clickOnRecipie()"></app-recipe-view>
+    <app-recipe-view style="width: 300px" [view]="'day'" [title]="'Breakfast'" (click)="clickOnRecipie()"></app-recipe-view>
+    <app-recipe-view style="width: 300px" [view]="'day'" [title]="'Lunch'" (click)="clickOnRecipie()"></app-recipe-view>
+    <app-recipe-view style="width: 300px" [view]="'day'" [title]="'Dinner'" (click)="clickOnRecipie()"></app-recipe-view>
 
 
 
@@ -19,7 +19,7 @@
 
     <br>
 
-    <app-recipe-view  [expandedView]="true" styleClass="ui-card-shadow">
+    <app-recipe-view  [view]="'solo'" styleClass="ui-card-shadow">
 
 
     </app-recipe-view>
