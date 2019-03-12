@@ -1,6 +1,52 @@
 <p-tabView>
-  <p-tabPanel header="Generall">
-    Content 1
+  <p-tabPanel header="General">
+    <form class="user-form">
+      <label style="color: deepskyblue">Profile</label>
+      <hr>
+      <div class="row">
+        <span>Email</span>
+        <div>
+          <div *ngIf="!emailEdit">
+            <span [innerHTML]="mailValue"></span>
+            <p-button style="margin-left: 5px" icon="pi pi-pencil" (click)="changeMail()"></p-button>
+          </div>
+          <div *ngIf="emailEdit">
+            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="mailValue"  pInputText/>
+            <p-button style="margin-left: 5px" icon="pi pi-check" (click)="saveMail()"></p-button>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <span>Firstname</span>
+        <div>
+          <div *ngIf="!firstnameEdit">
+            <span [innerHTML]="firstnameValue"></span>
+            <p-button style="margin-left: 5px" icon="pi pi-pencil" (click)="changeFisrtname()"></p-button>
+          </div>
+          <div *ngIf="firstnameEdit">
+            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="firstnameValue" pInputText/>
+            <p-button style="margin-left: 5px" icon="pi pi-check" (click)="saveFirstname()"></p-button>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <span>Lastname</span>
+        <div>
+          <div *ngIf="!lastNameEdit">
+            <span  [innerHTML]="lastnameValue"></span>
+            <p-button style="margin-left: 5px" icon="pi pi-pencil" (click)="changeLastname()"></p-button>
+          </div>
+          <div *ngIf="lastNameEdit">
+            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="lastnameValue" pInputText/>
+            <p-button style="margin-left: 5px" icon="pi pi-check" (click)="saveLastname()"></p-button>
+          </div>
+        </div>
+      </div>
+      <!--<input type="text" pInputText/>-->
+
+    </form>
   </p-tabPanel>
   <p-tabPanel header="Food-Settings">
     Content 2

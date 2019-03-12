@@ -1,0 +1,15 @@
+.user-form{
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  width: 50%;
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+}
+
+hr{
+  width: 100%;
+}
